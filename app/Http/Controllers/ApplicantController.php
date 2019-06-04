@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Applicant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
-class AdminController extends Controller
+class ApplicantController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,7 +25,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $applicants = Applicant::paginate(25);
+
+        return view('applicant.index', compact('applicants'));
     }
 
     /**
@@ -33,7 +37,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('customer.create');
+        return view('applicant.create');
     }
 
     /**
@@ -45,14 +49,15 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        //TODO: add validation
 
         $requestData = $request->all();
 
-        Customer::create($requestData);
+        Applicant::create($requestData);
 
-        Session::flash('flash_message', 'Customer added!');
+        \Session::flash('flash_message', 'Applicant added!');
 
-        return redirect('customer');
+        return redirect('applicant');
     }
 
     /**
@@ -64,9 +69,9 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        $customer = Customer::findOrFail($id);
+        $applicant = Applicant::findOrFail($id);
 
-        return view('customer.show', compact('customer'));
+        return view('applicant.show', compact('applicant'));
     }
 
     /**
@@ -78,9 +83,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $customer = Customer::findOrFail($id);
+        $applicant = Applicant::findOrFail($id);
 
-        return view('customer.edit', compact('customer'));
+        return view('applicant.edit', compact('applicant'));
     }
 
     /**
@@ -93,15 +98,15 @@ class AdminController extends Controller
      */
     public function update($id, Request $request)
     {
-
+        // TODO: add validation
         $requestData = $request->all();
 
-        $customer = Customer::findOrFail($id);
-        $customer->update($requestData);
+        $applicant = Applicant::findOrFail($id);
+        $applicant->update($requestData);
 
-        Session::flash('flash_message', 'Customer updated!');
+        \Session::flash('flash_message', 'Applicant updated!');
 
-        return redirect('customer');
+        return redirect('applicant');
     }
 
     /**
@@ -113,10 +118,10 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        Customer::destroy($id);
+        Applicant::destroy($id);
 
-        Session::flash('flash_message', 'Customer deleted!');
+        \Session::flash('flash_message', 'Applicant deleted!');
 
-        return redirect('customer');
+        return redirect('applicant');
     }
 }

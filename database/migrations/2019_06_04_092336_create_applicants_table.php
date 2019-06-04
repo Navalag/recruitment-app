@@ -15,7 +15,14 @@ class CreateApplicantsTable extends Migration
     {
         Schema::create('applicants', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->string('first_name', 50);
+            $table->string('last_name', 50);
+            $table->string('email', 50);
+            $table->string('phone_number', 50)->nullable();
+            $table->string('start_test_link', 255)->nullable();
+            $table->string('finish_test_link', 255)->nullable();
+            $table->dateTime('start_test_time')->nullable();
+            $table->dateTime('finish_test_time')->nullable();
         });
     }
 
