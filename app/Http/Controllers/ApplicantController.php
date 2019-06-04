@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Applicant;
+use App\Mail\ApplicantTestTask;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 class ApplicantController extends Controller
 {
@@ -45,14 +48,32 @@ class ApplicantController extends Controller
      * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     *
+     * @throws \Exception
      */
     public function store(Request $request)
     {
-        //TODO: add validation
+        $this->validate($request, [
+            'first_name'   => 'string|required|max:50',
+            'last_name'    => 'string|required|max:50',
+            'email'        => 'required',//|unique:applicants|max:50',
+            'phone_number' => 'numeric|required',
+        ]);
 
-        $requestData = $request->all();
+        // TODO: check these links in DB
+        $startTestLink = '/start-test/' . Str::random(32);
+        $finishTestLink = '/finish-test/' . Str::random(32);
 
-        Applicant::create($requestData);
+        Applicant::create([
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
+            'email' => $request->get('email'),
+            'phone_number' => $request->get('phone_number'),
+            'start_test_link' => url($startTestLink),
+            'finish_test_link' => url($finishTestLink),
+        ]);
+
+        Mail::to($request->get('email'))->send(new ApplicantTestTask($startTestLink, $finishTestLink));
 
         \Session::flash('flash_message', 'Applicant added!');
 

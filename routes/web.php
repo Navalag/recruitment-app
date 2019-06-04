@@ -18,3 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('applicant', 'ApplicantController');
+Route::get('/start-test/{key}', 'TestTasksController@startTestTask');
+Route::get('/finish-test/{key}', 'TestTasksController@finishTestTask');
