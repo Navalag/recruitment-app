@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Applicant;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 
 class ApplicantController extends Controller
 {

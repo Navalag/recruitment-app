@@ -4,13 +4,13 @@
 <div class="container">
 
     <h1>Applicant {{ $applicant->id }}
-        <a href="{{ url('applicant/' . $applicant->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Applicant"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+        <a href="{{ url('applicant/' . $applicant->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Applicant"><i class="fas fa-pencil-alt"></i></a>
         {!! Form::open([
             'method'=>'DELETE',
             'url' => ['applicant', $applicant->id],
             'style' => 'display:inline'
         ]) !!}
-            {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"/>', array(
+            {!! Form::button('<i class="far fa-trash-alt"></i>', array(
                     'type' => 'submit',
                     'class' => 'btn btn-danger btn-xs',
                     'title' => 'Delete Applicant',
