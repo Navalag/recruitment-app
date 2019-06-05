@@ -18,6 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('applicant', 'ApplicantController');
+
 Route::resource('vacancy', 'VacanciesController');
+
 Route::get('/start-test/{key}', 'TestTasksController@startTestTask');
+Route::post('/start-test', 'TestTasksController@beginTestTask');
+
 Route::get('/finish-test/{key}', 'TestTasksController@finishTestTask');
+Route::post('/finish-test', 'TestTasksController@recordFinishTestTaskTime');

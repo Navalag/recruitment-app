@@ -11,20 +11,17 @@ class ApplicantTestTask extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $startTestLink;
-    public $finishTestLink;
+    public $uniqueKey;
 
     /**
      * Create a new message instance.
      *
-     * @param $startTestLink
-     * @param $finishTestLink
+     * @param $uniqueKey
      * @return void
      */
-    public function __construct($startTestLink, $finishTestLink)
+    public function __construct($uniqueKey)
     {
-        $this->startTestLink = $startTestLink;
-        $this->$finishTestLink = $finishTestLink;
+        $this->uniqueKey = $uniqueKey;
     }
 
     /**

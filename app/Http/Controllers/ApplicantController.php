@@ -61,9 +61,7 @@ class ApplicantController extends Controller
             'vacancy_id'      => 'numeric|required',
         ]);
 
-        // TODO: check these links in DB
-        $startTestLink = '/start-test/' . Str::random(32);
-        $finishTestLink = '/finish-test/' . Str::random(32);
+        $uniqueKey = uniqid();
 
         Applicant::create([
             'first_name'       => $request->get('first_name'),
@@ -71,12 +69,11 @@ class ApplicantController extends Controller
             'email'            => $request->get('email'),
             'phone_number'     => $request->get('phone_number'),
             'vacancy_id'       => $request->get('vacancy_id'),
-            'start_test_link'  => url($startTestLink),
-            'finish_test_link' => url($finishTestLink),
+            'unique_key'       => $uniqueKey,
             'status'           => 'email sent',
         ]);
 
-        Mail::to($request->get('email'))->send(new ApplicantTestTask($startTestLink, $finishTestLink));
+        Mail::to($request->get('email'))->send(new ApplicantTestTask($uniqueKey));
 
         \Session::flash('flash_message', 'Applicant added!');
 
