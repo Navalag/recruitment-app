@@ -27,7 +27,7 @@ class ApplicantController extends Controller
      */
     public function index()
     {
-        $applicants = Applicant::paginate(25);
+        $applicants = Applicant::latest()->paginate(25);
 
         return view('applicant.index', compact('applicants'));
     }
@@ -56,8 +56,8 @@ class ApplicantController extends Controller
         $this->validate($request, [
             'first_name'   => 'string|required|max:50',
             'last_name'    => 'string|required|max:50',
-            'email'        => 'required',//|unique:applicants|max:50',
-            'phone_number' => 'numeric|required',
+            'email'        => 'required|unique:applicants|max:50',
+            'phone_number' => 'numeric',
         ]);
 
         // TODO: check these links in DB
@@ -115,14 +115,19 @@ class ApplicantController extends Controller
      * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
     public function update($id, Request $request)
     {
-        // TODO: add validation
-        $requestData = $request->all();
+        $this->validate($request, [
+            'first_name'   => 'string|required|max:50',
+            'last_name'    => 'string|required|max:50',
+            'email'        => 'required|unique:applicants|max:50',
+            'phone_number' => 'numeric',
+        ]);
 
         $applicant = Applicant::findOrFail($id);
-        $applicant->update($requestData);
+        $applicant->update($request->all());
 
         \Session::flash('flash_message', 'Applicant updated!');
 

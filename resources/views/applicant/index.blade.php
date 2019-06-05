@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
 
-        <h1>Applicant <a href="{{ url('/applicant/create') }}" class="btn btn-primary btn-xs" title="Add New Applicant"><i class="fas fa-plus"></i></a></h1>
+        <h1>Applicants <a href="{{ url('/applicant/create') }}" class="btn btn-primary btn-xs" title="Add New Applicant"><i class="fas fa-plus"></i></a></h1>
         <div class="table">
             <table class="table table-bordered table-striped table-hover">
                 <thead>

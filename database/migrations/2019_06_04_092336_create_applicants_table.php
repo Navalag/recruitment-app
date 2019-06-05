@@ -23,6 +23,7 @@ class CreateApplicantsTable extends Migration
             $table->string('finish_test_link', 255)->nullable();
             $table->dateTime('start_test_time')->nullable();
             $table->dateTime('finish_test_time')->nullable();
+            $table->timestamps();
         });
     }
 
