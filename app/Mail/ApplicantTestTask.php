@@ -34,6 +34,7 @@ class ApplicantTestTask extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.test-task');
+        return $this->from('example@example.com')
+                    ->markdown('emails.test-task');
     }
 }
