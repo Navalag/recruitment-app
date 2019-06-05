@@ -36,6 +36,16 @@
                 {!! $errors->first('phone_number', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
+        <div class="form-group {{ $errors->has('job_title') ? 'has-error' : ''}}">
+            {!! Form::label('job_title', 'Job Applied For', ['class' => 'col-sm-3 control-label']) !!}
+            <div class="col-sm-6">
+                <select name="vacancy_id" class="form-control">
+                    @foreach( \App\Vacancy::all() as $vacancy )
+                        <option value="{{ $vacancy->id }}">{{ $vacancy->job_title }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
 
 
         <div class="form-group">

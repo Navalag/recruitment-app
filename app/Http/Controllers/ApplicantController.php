@@ -54,10 +54,11 @@ class ApplicantController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'first_name'   => 'string|required|max:50',
-            'last_name'    => 'string|required|max:50',
-            'email'        => 'required|unique:applicants|max:50',
-            'phone_number' => 'numeric',
+            'first_name'      => 'string|required|max:50',
+            'last_name'       => 'string|required|max:50',
+            'email'           => 'required|unique:applicants|max:50',
+            'phone_number'    => 'numeric',
+            'vacancy_id'      => 'numeric|required',
         ]);
 
         // TODO: check these links in DB
@@ -65,12 +66,14 @@ class ApplicantController extends Controller
         $finishTestLink = '/finish-test/' . Str::random(32);
 
         Applicant::create([
-            'first_name' => $request->get('first_name'),
-            'last_name' => $request->get('last_name'),
-            'email' => $request->get('email'),
-            'phone_number' => $request->get('phone_number'),
-            'start_test_link' => url($startTestLink),
+            'first_name'       => $request->get('first_name'),
+            'last_name'        => $request->get('last_name'),
+            'email'            => $request->get('email'),
+            'phone_number'     => $request->get('phone_number'),
+            'vacancy_id'       => $request->get('vacancy_id'),
+            'start_test_link'  => url($startTestLink),
             'finish_test_link' => url($finishTestLink),
+            'status'           => 'email sent',
         ]);
 
         Mail::to($request->get('email'))->send(new ApplicantTestTask($startTestLink, $finishTestLink));

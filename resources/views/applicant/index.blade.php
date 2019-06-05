@@ -8,14 +8,14 @@
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
-                    <th>S.No</th><th> First Name </th><th> Last Name </th><th> Email </th><th> Phone Number </th><th>Actions</th>
+                    <th>S.No</th><th> First Name </th><th> Last Name </th><th> Job Applied For </th><th> Email </th><th> Phone Number </th><th> Status </th><th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($applicants as $applicant)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $applicant->first_name }}</td><td>{{ $applicant->last_name }}</td><td>{{ $applicant->email }}</td><td>{{ $applicant->phone_number }}</td>
+                        <td>{{ $applicant->first_name }}</td><td>{{ $applicant->last_name }}</td><td>{{ $applicant->jobAppliedFor->job_title }}</td><td>{{ $applicant->email }}</td><td>{{ $applicant->phone_number }}</td><td><span class="badge badge-warning">{{ $applicant->status }}</span></td>
                         <td>
                             <a href="{{ url('/applicant/' . $applicant->id) }}" class="btn btn-success btn-xs" title="View Applicant"><i class="far fa-eye"></i></a>
                             <a href="{{ url('/applicant/' . $applicant->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Applicant"><i class="fas fa-pencil-alt"></i></a>
