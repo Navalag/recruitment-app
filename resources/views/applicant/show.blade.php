@@ -4,7 +4,7 @@
 <div class="container">
 
     <h1>Applicant {{ $applicant->id }}
-        <a href="{{ url('applicant/' . $applicant->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Applicant"><i class="fas fa-pencil-alt"></i></a>
+        <a href="{{ url('applicant/' . $applicant->id . '/edit') }}" class="btn btn-primary btn-sm" title="Edit Applicant"><i class="fas fa-pencil-alt"></i></a>
         {!! Form::open([
             'method'=>'DELETE',
             'url' => ['applicant', $applicant->id],
@@ -12,7 +12,7 @@
         ]) !!}
             {!! Form::button('<i class="far fa-trash-alt"></i>', array(
                     'type' => 'submit',
-                    'class' => 'btn btn-danger btn-xs',
+                    'class' => 'btn btn-danger btn-sm',
                     'title' => 'Delete Applicant',
                     'onclick'=>'return confirm("Confirm delete?")'
             ))!!}

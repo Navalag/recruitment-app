@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/applicant/{id}/send-email', 'ApplicantController@sendEmail');
 Route::resource('applicant', 'ApplicantController');
 
 Route::resource('vacancy', 'VacanciesController');

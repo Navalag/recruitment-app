@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Applicant;
 use App\Mail\ApplicantTestTask;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 
 class ApplicantController extends Controller
@@ -70,10 +69,8 @@ class ApplicantController extends Controller
             'phone_number'     => $request->get('phone_number'),
             'vacancy_id'       => $request->get('vacancy_id'),
             'unique_key'       => $uniqueKey,
-            'status'           => 'email sent',
+            'status'           => 'created',
         ]);
-
-        Mail::to($request->get('email'))->send(new ApplicantTestTask($uniqueKey));
 
         \Session::flash('flash_message', 'Applicant added!');
 
@@ -146,6 +143,32 @@ class ApplicantController extends Controller
         Applicant::destroy($id);
 
         \Session::flash('flash_message', 'Applicant deleted!');
+
+        return redirect('applicant');
+    }
+
+    public function sendEmail($id)
+    {
+        $applicant = Applicant::where('id', $id)->first();
+
+        if (! $applicant) {
+            \Session::flash('flash_message', 'Invalid Applicant ID.');
+
+            return redirect('applicant');
+        }
+
+        if ($applicant->status !== 'created') {
+            \Session::flash('flash_message', 'Email has already been sent.');
+
+            return redirect('applicant');
+        }
+
+        Mail::to($applicant->email)->send(new ApplicantTestTask($applicant->unique_key));
+
+        $applicant->status = 'email sent';
+        $applicant->save();
+
+        \Session::flash('flash_message', 'Email Sent!');
 
         return redirect('applicant');
     }
