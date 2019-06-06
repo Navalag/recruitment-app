@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9afcafb6-6e51-4883-9d89-b2293b27441b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Applicant.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Applicant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/applicant/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/applicant/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/phpunit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/ExampleTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/TestCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TestCase.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,10 +23,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tests/Feature/ExampleTest.php">
+        <entry file="file://$PROJECT_DIR$/tests/Feature/ApplicantControllerTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+            <state relative-caret-position="-3773">
+              <caret line="6" column="44" lean-forward="true" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -34,6 +40,7 @@
       <find>Customer</find>
       <find>applicant</find>
       <find>xs</find>
+      <find>dele</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -69,16 +76,27 @@
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/resources/views/applicant/show.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php" />
-        <option value="$PROJECT_DIR$/app/Applicant.php" />
         <option value="$PROJECT_DIR$/resources/views/applicant/index.blade.php" />
+        <option value="$PROJECT_DIR$/database/factories/ApplicantFactory.php" />
+        <option value="$PROJECT_DIR$/database/factories/VacancyFactory.php" />
+        <option value="$PROJECT_DIR$/database/seeds/development/ApplicantsTableSeeder.php" />
+        <option value="$PROJECT_DIR$/database/seeds/development/VacanciesTableSeeder.php" />
+        <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
+        <option value="$PROJECT_DIR$/database/seeds/development/UsersTableSeeder.php" />
+        <option value="$PROJECT_DIR$/phpunit.xml" />
+        <option value="$PROJECT_DIR$/tests/utilities/functions.php" />
+        <option value="$PROJECT_DIR$/tests/TestCase.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/app/Applicant.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php" />
+        <option value="$PROJECT_DIR$/tests/Feature/ApplicantControllerTest.php" />
       </list>
     </option>
   </component>
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.1">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/opis/closure" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
@@ -226,7 +244,26 @@
               <item name="recruitment-app" type="b2602c69:ProjectViewProjectNode" />
               <item name="recruitment-app" type="462c0819:PsiDirectoryNode" />
               <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="factories" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recruitment-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recruitment-app" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
               <item name="migrations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recruitment-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recruitment-app" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="seeds" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="recruitment-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recruitment-app" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="seeds" type="462c0819:PsiDirectoryNode" />
+              <item name="development" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="recruitment-app" type="b2602c69:ProjectViewProjectNode" />
@@ -290,6 +327,12 @@
               <item name="tests" type="462c0819:PsiDirectoryNode" />
               <item name="Feature" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="recruitment-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="recruitment-app" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="utilities" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -311,6 +354,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/database/seeds" />
+      <recent name="$PROJECT_DIR$/database/seeds/development" />
       <recent name="$PROJECT_DIR$/resources/views/admin" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -330,9 +375,25 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="PHPUnit.ExampleTest.testBasicTest">
-    <configuration name="ExampleTest.testBasicTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Feature\ExampleTest" file="$PROJECT_DIR$/tests/Feature/ExampleTest.php" method="testBasicTest" scope="Method" />
+  <component name="RunManager" selected="PHPUnit.ApplicantControllerTest">
+    <configuration name="ApplicantControllerTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\ApplicantControllerTest" file="$PROJECT_DIR$/tests/Feature/ApplicantControllerTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ApplicantControllerTest.an_admin_can_send_email" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\ApplicantControllerTest" file="$PROJECT_DIR$/tests/Feature/ApplicantControllerTest.php" method="an_admin_can_send_email" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ApplicantControllerTest.an_admin_may_not_send_email_twice" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\ApplicantControllerTest" file="$PROJECT_DIR$/tests/Feature/ApplicantControllerTest.php" method="an_admin_may_not_send_email_twice" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ApplicantControllerTest.guests_may_not_edit_applicant" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\ApplicantControllerTest" file="$PROJECT_DIR$/tests/Feature/ApplicantControllerTest.php" method="guests_may_not_edit_applicant" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ApplicantControllerTest.unauthorized_users_may_not_send_email" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\ApplicantControllerTest" file="$PROJECT_DIR$/tests/Feature/ApplicantControllerTest.php" method="unauthorized_users_may_not_send_email" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -341,7 +402,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="PHPUnit.ExampleTest.testBasicTest" />
+        <item itemvalue="PHPUnit.ApplicantControllerTest" />
+        <item itemvalue="PHPUnit.ApplicantControllerTest.unauthorized_users_may_not_send_email" />
+        <item itemvalue="PHPUnit.ApplicantControllerTest.an_admin_may_not_send_email_twice" />
+        <item itemvalue="PHPUnit.ApplicantControllerTest.an_admin_can_send_email" />
+        <item itemvalue="PHPUnit.ApplicantControllerTest.guests_may_not_edit_applicant" />
       </list>
     </recent_temporary>
   </component>
@@ -360,20 +425,52 @@
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="ApplicantControllerTest_an_admin_may_not_send_email_twice - 2019.06.06 at 17h 07m 42s.xml">
+      <configuration name="ApplicantControllerTest.an_admin_may_not_send_email_twice" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ApplicantControllerTest_an_admin_may_not_send_email_twice - 2019.06.06 at 17h 07m 54s.xml">
+      <configuration name="ApplicantControllerTest.an_admin_may_not_send_email_twice" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ApplicantControllerTest_an_admin_may_not_send_email_twice - 2019.06.06 at 17h 09m 01s.xml">
+      <configuration name="ApplicantControllerTest.an_admin_may_not_send_email_twice" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ApplicantControllerTest_an_admin_may_not_send_email_twice - 2019.06.06 at 17h 09m 10s.xml">
+      <configuration name="ApplicantControllerTest.an_admin_may_not_send_email_twice" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ApplicantControllerTest_an_admin_may_not_send_email_twice - 2019.06.06 at 17h 09m 31s.xml">
+      <configuration name="ApplicantControllerTest.an_admin_may_not_send_email_twice" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ApplicantControllerTest_an_admin_may_not_send_email_twice - 2019.06.06 at 17h 09m 39s.xml">
+      <configuration name="ApplicantControllerTest.an_admin_may_not_send_email_twice" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ApplicantControllerTest_an_admin_may_not_send_email_twice - 2019.06.06 at 17h 10m 28s.xml">
+      <configuration name="ApplicantControllerTest.an_admin_may_not_send_email_twice" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ApplicantControllerTest_unauthorized_users_may_not_send_email - 2019.06.06 at 17h 14m 01s.xml">
+      <configuration name="ApplicantControllerTest.unauthorized_users_may_not_send_email" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ApplicantControllerTest_unauthorized_users_may_not_send_email - 2019.06.06 at 17h 24m 07s.xml">
+      <configuration name="ApplicantControllerTest.unauthorized_users_may_not_send_email" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ApplicantControllerTest - 2019.06.06 at 17h 25m 14s.xml">
+      <configuration name="ApplicantControllerTest" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32782000" />
+    <option name="totallyTimeSpent" value="45192000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23333333" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23333333" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32990867" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.27853882" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -518,13 +615,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_06_05_082923_create_vacancies_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="17" column="41" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/test-task/start.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="532">
@@ -595,27 +685,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
-          <folding>
-            <element signature="e#7#389#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="768">
           <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/applicant/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="977">
-          <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -627,38 +700,169 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php">
+    <entry file="file://$PROJECT_DIR$/tests/Feature/ExampleTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="168">
+          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_06_04_092336_create_applicants_table.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_06_05_082923_create_vacancies_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="25" column="46" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="46" />
+        <state relative-caret-position="448">
+          <caret line="17" column="41" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="41" />
+          <caret line="18" column="37" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/factories/VacancyFactory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="11" column="6" lean-forward="true" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/factories/ApplicantFactory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="17" column="6" lean-forward="true" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/factories/UserFactory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="20" column="31" lean-forward="true" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/development/VacanciesTableSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding>
+            <element signature="e#7#38#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/development/ApplicantsTableSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding>
+            <element signature="e#7#38#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/UsersTableSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="42" />
+          <folding>
+            <element signature="e#7#38#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/development/UsersTableSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding>
+            <element signature="e#7#20#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phpunit.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="812">
+          <caret line="29" column="51" lean-forward="true" selection-start-line="29" selection-start-column="51" selection-end-line="29" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/TestCase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/utilities/functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="633">
+          <caret line="48" column="50" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Applicant.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="10" column="61" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
+        <state relative-caret-position="392">
+          <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/applicant/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="231">
+          <caret line="38" column="47" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/Feature/ExampleTest.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_06_04_092336_create_applicants_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+        <state relative-caret-position="-102">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/applicant/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-72">
+          <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="38" />
+          <folding>
+            <element signature="e#7#389#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="164" column="42" selection-start-line="164" selection-start-column="29" selection-end-line="164" selection-end-column="42" />
+          <folding>
+            <element signature="e#40#58#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Feature/ApplicantControllerTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3773">
+          <caret line="6" column="44" lean-forward="true" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
         </state>
       </provider>
     </entry>

@@ -119,8 +119,8 @@ class ApplicantController extends Controller
         $this->validate($request, [
             'first_name'   => 'string|required|max:50',
             'last_name'    => 'string|required|max:50',
-            'email'        => 'required|unique:applicants|max:50',
-            'phone_number' => 'numeric',
+            'email'        => 'required|max:50|unique:applicants,email,'.$id,
+            'phone_number' => 'numeric|nullable',
         ]);
 
         $applicant = Applicant::findOrFail($id);
@@ -141,6 +141,10 @@ class ApplicantController extends Controller
     public function destroy($id)
     {
         Applicant::destroy($id);
+
+        if (request()->wantsJson()) {
+            return response([], 204);
+        }
 
         \Session::flash('flash_message', 'Applicant deleted!');
 
@@ -167,6 +171,10 @@ class ApplicantController extends Controller
 
         $applicant->status = 'email sent';
         $applicant->save();
+
+        if (request()->wantsJson()) {
+            return response([], 200);
+        }
 
         \Session::flash('flash_message', 'Email Sent!');
 
