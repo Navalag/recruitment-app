@@ -8,14 +8,30 @@
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
-                    <th>S.No</th><th> First Name </th><th> Last Name </th><th> Job Applied For </th><th> Email </th><th> Phone Number </th><th> Status </th><th>Actions</th>
+                    <th> Name </th><th> Position </th><th> Email </th><th> Status </th><th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($applicants as $applicant)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $applicant->first_name }}</td><td>{{ $applicant->last_name }}</td><td>{{ $applicant->jobAppliedFor->job_title }}</td><td>{{ $applicant->email }}</td><td>{{ $applicant->phone_number }}</td><td><span class="badge badge-warning">{{ $applicant->status }}</span></td>
+                        <td>{{ $applicant->first_name . ' ' . $applicant->last_name }}</td>
+                        <td>{{ $applicant->jobAppliedFor->job_title }}</td>
+                        <td>{{ $applicant->email }}</td>
+                        <td>
+                            @if ($applicant->status === 'created')
+                                <span class="badge badge-secondary"> created</span>
+                            @elseif ($applicant->status === 'email sent')
+                                <span class="badge badge-primary"> email sent</span>
+                            @elseif ($applicant->status === 'test started' || $applicant->status === 'test finished')
+                                <span class="badge badge-warning">begin:</span> <small>{{ $applicant->start_test_time->diffForHumans() }}</small>
+                            @endif
+                            @if ($applicant->status === 'test finished')
+                                    <br>
+                                <span class="badge badge-success">finish:</span> <small>{{ $applicant->finish_test_time->diffForHumans() }}</small>
+                                    <br>
+                                <span class="badge badge-light">time spent:</span> <small>{{ $applicant->finish_test_time->diffInHours($applicant->start_test_time) . ' ' . Str::plural('hour', $applicant->finish_test_time->diffInHours($applicant->start_test_time)) }}</small>
+                            @endif
+                        </td>
                         <td>
                             <a href="{{ url('/applicant/' . $applicant->id) }}" class="btn btn-success btn-sm" title="View Applicant"><i class="far fa-eye"></i></a>
                             <a href="{{ url('/applicant/' . $applicant->id . '/edit') }}" class="btn btn-primary btn-sm" title="Edit Applicant"><i class="fas fa-pencil-alt"></i></a>
