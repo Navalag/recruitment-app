@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-    <h1>Applicant {{ $applicant->id }}
+    <h1>{{ $applicant->first_name . ' ' . $applicant->last_name }}
         <a href="{{ url('applicant/' . $applicant->id . '/edit') }}" class="btn btn-primary btn-sm" title="Edit Applicant"><i class="fas fa-pencil-alt"></i></a>
         {!! Form::open([
             'method'=>'DELETE',

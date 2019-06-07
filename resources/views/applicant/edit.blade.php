@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-    <h1>Edit Applicant {{ $applicant->id }}</h1>
+    <h1 style="margin-bottom: 25px;">{{ $applicant->first_name . ' ' . $applicant->last_name }}</h1>
 
     {!! Form::model($applicant, [
         'method' => 'PATCH',
