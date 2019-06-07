@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         Collective\Html\HtmlServiceProvider::class,
+        Dacastro4\LaravelGmail\LaravelGmailServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -228,6 +229,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'LaravelGmail' => Dacastro4\LaravelGmail\Facade\LaravelGmail::class,
 
     ],
 

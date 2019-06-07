@@ -27,3 +27,8 @@ Route::post('/start-test', 'TestTasksController@beginTestTask');
 
 Route::get('/finish-test/{key}', 'TestTasksController@finishTestTask');
 Route::post('/finish-test', 'TestTasksController@recordFinishTestTaskTime');
+
+Route::get('/oauth/gmail', 'GmailController@auth');
+Route::get('/oauth/gmail/callback', 'GmailController@makeToken');
+Route::get('/oauth/gmail/logout', 'GmailController@logout');
+Route::get('/gmail/show-messages', 'GmailController@showMessages');

@@ -21,7 +21,7 @@ class CreateApplicantsTable extends Migration
             $table->string('email', 50);
             $table->string('phone_number', 50)->nullable();
             $table->string('status', 50);
-            $table->string('unique_key', 255)->nullable();
+            $table->string('unique_key', 255);
             $table->dateTime('start_test_time')->nullable();
             $table->dateTime('finish_test_time')->nullable();
             $table->timestamps();
