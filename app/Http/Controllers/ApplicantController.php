@@ -6,6 +6,7 @@ use App\Applicant;
 use App\Mail\ApplicantTestTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Services\GmailService;
 
 class ApplicantController extends Controller
 {
@@ -28,7 +29,26 @@ class ApplicantController extends Controller
     {
         $applicants = Applicant::latest()->paginate(25);
 
+        $unreadEmailList = ( new GmailService() )->getAllUnreadEmailsSenders();
+
+        $applicants->transform(function (Applicant $applicant) use ($unreadEmailList) {
+            $applicant->unread_emails_count = $this->countUnreadEmails($unreadEmailList, $applicant);
+
+            return $applicant;
+        });
+
         return view('applicant.index', compact('applicants'));
+    }
+
+    private function countUnreadEmails($unreadEmailList, $applicant)
+    {
+        $count = 0;
+
+        $unreadEmailList->each(function ($email) use ($applicant, &$count) {
+            if ($email === $applicant->email) $count++;
+        });
+
+        return $count;
     }
 
     /**

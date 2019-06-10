@@ -60,6 +60,9 @@
                                     $applicant->status !== 'created' ? 'disabled' : ''
                             )) !!}
                             {!! Form::close() !!}
+                            @if ($applicant->unread_emails_count)
+                                <span class="badge badge-danger">{{ $applicant->unread_emails_count }}</span>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
