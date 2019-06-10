@@ -6,23 +6,31 @@ use Dacastro4\LaravelGmail\Facade\LaravelGmail;
 
 class GmailService
 {
-    public function showMessages()
+    public function showMessages($email)
     {
-//        $messages = LaravelGmail::message()->unread()->preload()->all();
-        $messages = LaravelGmail::message()->unread()->preload()->all( $pageToken = null );
+        $messages = LaravelGmail::message()->from($email)->take(10)->preload()->all();
+        $mailHistory = [];
+
+        foreach ( $messages as $key => $message ) {
+            $mailHistory[$key]['subject'] = $message->getSubject();
+            $mailHistory[$key]['body'] = $message->getPlainTextBody();
+        }
+
+        return $mailHistory;
+    }
+
+    public function markAsRead($email)
+    {
+        $messages = LaravelGmail::message()->from($email)->take(10)->all();
 
         foreach ( $messages as $message ) {
-            $body = $message->getHtmlBody();
-            $subject = $message->getSubject();
-            dump($subject, $body);
+            $message->markAsRead();
         }
-        die();
     }
 
     public function getAllUnreadEmailsSenders()
     {
-        $messages = $this->getAllUnreadEmails();
-
+        $messages = collect(LaravelGmail::message()->unread()->preload()->all());
         $fromList = [];
 
         $messages->each(function ($message) use (&$fromList) {
@@ -30,11 +38,6 @@ class GmailService
         });
 
         return $this->getUnreadEmailsList($fromList);
-    }
-
-    private function getAllUnreadEmails()
-    {
-        return collect(LaravelGmail::message()->unread()->preload()->all());
     }
 
     private function getUnreadEmailsList($fromList)

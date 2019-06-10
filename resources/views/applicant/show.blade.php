@@ -41,6 +41,19 @@
                         <th> Test Task Link </th><td> {{ $applicant->test_task_link }} </td>
                     </tr>
                 @endif
+                @if ($mailHistory)
+                    <tr>
+                        <th> - </th><td> - </td>
+                    </tr>
+                    <tr>
+                        <th> Email Subject </th><td> Email Body </td>
+                    </tr>
+                    @foreach($mailHistory as $mail)
+                    <tr>
+                        <th> {{ $mail['subject'] }} </th><td> {{ $mail['body'] }} </td>
+                    </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
     </div>

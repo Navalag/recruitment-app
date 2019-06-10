@@ -7,6 +7,7 @@ use App\Mail\ApplicantTestTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Services\GmailService;
+use Illuminate\Support\Facades\Cache;
 
 class ApplicantController extends Controller
 {
@@ -29,7 +30,10 @@ class ApplicantController extends Controller
     {
         $applicants = Applicant::latest()->paginate(25);
 
-        $unreadEmailList = ( new GmailService() )->getAllUnreadEmailsSenders();
+//        Cache::forget('unread_emails_list');
+        $unreadEmailList = Cache::remember('unread_emails_list', now()->addMinutes(2), function() {
+            return ( new GmailService() )->getAllUnreadEmailsSenders();
+        });
 
         $applicants->transform(function (Applicant $applicant) use ($unreadEmailList) {
             $applicant->unread_emails_count = $this->countUnreadEmails($unreadEmailList, $applicant);
@@ -38,17 +42,6 @@ class ApplicantController extends Controller
         });
 
         return view('applicant.index', compact('applicants'));
-    }
-
-    private function countUnreadEmails($unreadEmailList, $applicant)
-    {
-        $count = 0;
-
-        $unreadEmailList->each(function ($email) use ($applicant, &$count) {
-            if ($email === $applicant->email) $count++;
-        });
-
-        return $count;
     }
 
     /**
@@ -107,8 +100,22 @@ class ApplicantController extends Controller
     public function show($id)
     {
         $applicant = Applicant::findOrFail($id);
+        $email = $applicant->email;
+        $gmailService = new GmailService();
 
-        return view('applicant.show', compact('applicant'));
+//        Cache::forget('email_history');
+        $mailHistory = Cache::remember('email_history', now()->addMinutes(2), function() use ($email, $gmailService) {
+            return collect($gmailService->showMessages($email));
+        });
+
+        $gmailService->markAsRead($email);
+
+        Cache::forget('unread_emails_list');
+
+        return view('applicant.show')->with([
+            'applicant' => $applicant,
+            'mailHistory' => $mailHistory
+        ]);
     }
 
     /**
@@ -199,5 +206,16 @@ class ApplicantController extends Controller
         \Session::flash('flash_message', 'Email Sent!');
 
         return redirect('applicant');
+    }
+
+    private function countUnreadEmails($unreadEmailList, $applicant)
+    {
+        $count = 0;
+
+        $unreadEmailList->each(function ($email) use ($applicant, &$count) {
+            if ($email === $applicant->email) $count++;
+        });
+
+        return $count;
     }
 }
