@@ -7,25 +7,6 @@ use Dacastro4\LaravelGmail\Facade\LaravelGmail;
 
 class GmailController extends Controller
 {
-    public function auth()
-    {
-        return LaravelGmail::redirect();
-    }
-
-    public function makeToken()
-    {
-        LaravelGmail::makeToken();
-
-        return redirect('/');
-    }
-
-    public function logout()
-    {
-        LaravelGmail::logout(); //It returns exception if fails
-
-        return redirect()->to('/');
-    }
-
     public function showMessages()
     {
 //        $messages = LaravelGmail::message()->unread()->preload()->all();
