@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9afcafb6-6e51-4883-9d89-b2293b27441b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TestTasksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TestTasksController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_06_04_092336_create_applicants_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_06_04_092336_create_applicants_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/applicant/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/applicant/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/applicant/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/applicant/show.blade.php" afterDir="false" />
     </list>
@@ -17,12 +19,12 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/applicant/edit.blade.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TestTasksController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+            <state relative-caret-position="697">
+              <caret line="60" column="63" selection-start-line="60" selection-start-column="63" selection-end-line="60" selection-end-column="63" />
               <folding>
-                <element signature="e#78#106#0#HTML" expanded="true" />
+                <element signature="e#40#58#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -64,7 +66,6 @@
         <option value="$PROJECT_DIR$/resources/views/test-task/start.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/emails/test-task.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/test-task/finish.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/TestTasksController.php" />
         <option value="$PROJECT_DIR$/config/mail.php" />
         <option value="$PROJECT_DIR$/app/Mail/ApplicantTestTask.php" />
         <option value="$PROJECT_DIR$/resources/views/applicant/index.blade.php" />
@@ -79,12 +80,10 @@
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/tests/Feature/ApplicantControllerTest.php" />
         <option value="$PROJECT_DIR$/database/factories/ApplicantFactory.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_06_04_092336_create_applicants_table.php" />
         <option value="$PROJECT_DIR$/credentials.json" />
         <option value="$PROJECT_DIR$/gmail/quickstart.php" />
         <option value="$PROJECT_DIR$/gmail/credentials.json" />
         <option value="$PROJECT_DIR$/config/app.php" />
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/config/gmail.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/GmailController.php" />
@@ -92,6 +91,9 @@
         <option value="$PROJECT_DIR$/app/Applicant.php" />
         <option value="$PROJECT_DIR$/resources/views/applicant/show.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/applicant/edit.blade.php" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_06_04_092336_create_applicants_table.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/TestTasksController.php" />
       </list>
     </option>
   </component>
@@ -467,7 +469,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59496000" />
+    <option name="totallyTimeSpent" value="60987000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -560,16 +562,6 @@
         <state relative-caret-position="504">
           <caret line="14" column="160" selection-start-line="14" selection-start-column="160" selection-end-line="14" selection-end-column="160" />
           <caret line="18" column="137" selection-start-line="18" selection-start-column="137" selection-end-line="18" selection-end-column="137" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TestTasksController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-          <folding>
-            <element signature="e#40#58#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -746,13 +738,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_06_04_092336_create_applicants_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="23" column="45" lean-forward="true" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/credentials.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="28">
@@ -812,13 +797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="679">
-          <caret line="68" column="26" lean-forward="true" selection-start-line="68" selection-start-column="26" selection-end-line="68" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="735">
@@ -846,16 +824,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
-          <folding>
-            <element signature="e#40#58#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Applicant.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
@@ -865,17 +833,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/applicant/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="66" />
+        <state relative-caret-position="483">
+          <caret line="38" column="33" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/applicant/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+        <state relative-caret-position="231">
+          <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3309">
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
           <folding>
-            <element signature="e#78#106#0#HTML" expanded="true" />
+            <element signature="e#40#58#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_06_04_092336_create_applicants_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="672">
+          <caret line="26" column="42" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TestTasksController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="60" column="63" selection-start-line="60" selection-start-column="63" selection-end-line="60" selection-end-column="63" />
+          <folding>
+            <element signature="e#40#58#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

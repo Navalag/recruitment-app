@@ -36,6 +36,11 @@
                 <tr>
                     <th> Phone Number </th><td> {{ $applicant->phone_number }} </td>
                 </tr>
+                @if ($applicant->test_task_link)
+                    <tr>
+                        <th> Test Task Link </th><td> {{ $applicant->test_task_link }} </td>
+                    </tr>
+                @endif
             </tbody>
         </table>
     </div>

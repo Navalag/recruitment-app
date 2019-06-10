@@ -24,6 +24,7 @@ class CreateApplicantsTable extends Migration
             $table->string('unique_key', 255);
             $table->dateTime('start_test_time')->nullable();
             $table->dateTime('finish_test_time')->nullable();
+            $table->string('test_task_link', 255)->nullable();
             $table->timestamps();
         });
     }

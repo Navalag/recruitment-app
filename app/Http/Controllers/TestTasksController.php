@@ -51,8 +51,14 @@ class TestTasksController extends Controller
 
         if (! $applicant) return redirect('/');
 
+        if (! $applicant->start_test_time) {
+            // TODO: handel this case smarter
+            $applicant->start_test_time = now();
+        }
+
         if (! $applicant->finish_test_time) {
             $applicant->finish_test_time = now();
+            $applicant->test_task_link = $request->get('link');
             $applicant->status = 'test finished';
             $applicant->save();
         }
