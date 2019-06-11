@@ -194,7 +194,8 @@ class ApplicantController extends Controller
             return redirect('applicant');
         }
 
-        Mail::to($applicant->email)->send(new ApplicantTestTask($applicant->unique_key));
+        ( new GmailService )->sendEmail($applicant->email, 'Test', $applicant->unique_key);
+//        Mail::to($applicant->email)->send(new ApplicantTestTask($applicant->unique_key));
 
         $applicant->status = 'email sent';
         $applicant->save();

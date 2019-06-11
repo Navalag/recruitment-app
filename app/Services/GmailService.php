@@ -3,9 +3,21 @@
 namespace App\Services;
 
 use Dacastro4\LaravelGmail\Facade\LaravelGmail;
+use Dacastro4\LaravelGmail\Services\Message\Mail;
 
 class GmailService
 {
+    public function sendEmail($to, $subject, $uniqueKey)
+    {
+        $mail = new Mail();
+
+        $mail->to( $to, $name = null );
+        $mail->subject( $subject );
+        $mail->view( 'emails.test-task', ['uniqueKey' => $uniqueKey] );
+
+        $mail->send();
+    }
+
     public function showMessages($email)
     {
         $messages = LaravelGmail::message()->from($email)->take(10)->preload()->all();
