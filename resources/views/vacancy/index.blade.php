@@ -3,22 +3,30 @@
 @section('content')
     <div class="container">
 
-        <h1>Vacancies <a href="{{ url('/vacancy/create') }}" class="btn btn-primary btn-xs" title="Add New Vacancy"><i class="fas fa-plus"></i></a></h1>
+        <h1>Vacancies <a href="{{ url('/vacancy/create') }}" class="btn btn-primary btn-sm" title="Add New Vacancy"><i class="fas fa-plus"></i></a></h1>
         <div class="table">
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
-                    <th>S.No</th><th> Job Title </th><th> Test Task URL </th><th>Actions</th>
+                    <th> Job Title </th><th> Applicants </th><th> Time For Task </th><th> Status </th><th style="min-width: 126px">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($vacancies as $vacancy)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $vacancy->job_title }}</td><td>{{ $vacancy->test_task_url }}</td>
+                        <td>{{ $vacancy->job_title }}</td>
+                        <td> - </td>
+                        <td>{{ $vacancy->time_for_task }}</td>
                         <td>
-                            <a href="{{ url('/vacancy/' . $vacancy->id) }}" class="btn btn-success btn-xs" title="View Vacancy"><i class="far fa-eye"></i></a>
-                            <a href="{{ url('/vacancy/' . $vacancy->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Vacancy"><i class="fas fa-pencil-alt"></i></a>
+                            @if ($vacancy->active_status === 1)
+                                <span class="badge badge-success">active</span>
+                            @else
+                                <span class="badge badge-secondary">inactive</span>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ url('/vacancy/' . $vacancy->id) }}" class="btn btn-success btn-sm" title="View Vacancy"><i class="far fa-eye"></i></a>
+                            <a href="{{ url('/vacancy/' . $vacancy->id . '/edit') }}" class="btn btn-primary btn-sm" title="Edit Vacancy"><i class="fas fa-pencil-alt"></i></a>
                             {!! Form::open([
                                 'method'=>'DELETE',
                                 'url' => ['/vacancy', $vacancy->id],
@@ -26,7 +34,7 @@
                             ]) !!}
                             {!! Form::button('<i class="far fa-trash-alt"></i>', array(
                                     'type' => 'submit',
-                                    'class' => 'btn btn-danger btn-xs',
+                                    'class' => 'btn btn-danger btn-sm',
                                     'title' => 'Delete Vacancy',
                                     'onclick'=>'return confirm("Confirm delete?")'
                             )) !!}

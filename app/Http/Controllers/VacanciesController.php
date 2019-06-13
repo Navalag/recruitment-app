@@ -50,15 +50,20 @@ class VacanciesController extends Controller
      */
     public function store(Request $request)
     {
+        // TODO: try to fix it in a better way
+        if( !$request->has('active_status') ) {
+            $request->merge(['active_status' => 0]);
+        }
         $this->validate($request, [
             'job_title'     => 'string|required|max:50',
             'test_task_url' => 'string|required|max:255',
+            'time_for_task' => 'numeric|max:100|min:1',
+            'email_subject' => 'string|max:255',
+            'email_body'    => 'string',
+            'active_status' => 'boolean|required',
         ]);
 
-        Vacancy::create([
-            'job_title'     => $request->get('job_title'),
-            'test_task_url' => $request->get('test_task_url'),
-        ]);
+        Vacancy::create($request->all());
 
         \Session::flash('flash_message', 'Vacancy added!');
 

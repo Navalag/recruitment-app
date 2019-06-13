@@ -15,8 +15,12 @@ class CreateVacanciesTable extends Migration
     {
         Schema::create('vacancies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('test_task_url', 255);
             $table->string('job_title', 50);
+            $table->string('test_task_url', 255)->nullable();
+            $table->string('email_subject', 255)->nullable();
+            $table->text('email_body')->nullable();
+            $table->integer('time_for_task')->nullable();
+            $table->boolean('active_status');
             $table->timestamps();
         });
     }
