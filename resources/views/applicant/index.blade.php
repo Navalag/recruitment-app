@@ -57,7 +57,7 @@
                                     'class' => 'btn btn-dark btn-sm',
                                     'title' => 'Send Email',
                                     'onclick'=>'return confirm("Confirm send email?")',
-                                    $applicant->status !== 'created' ? 'disabled' : ''
+                                    !$gmailOauth ? 'disabled' : (($applicant->status !== 'created') ? 'disabled' : '')
                             )) !!}
                             {!! Form::close() !!}
                             @if ($applicant->unread_emails_count)

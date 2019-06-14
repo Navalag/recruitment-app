@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Applicant;
 use App\Mail\ApplicantTestTask;
+use App\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Services\GmailService;
@@ -30,20 +31,28 @@ class ApplicantController extends Controller
     {
         $applicants = Applicant::whereHas('jobAppliedFor', function ($query){
             $query->where('active_status', 1);
-        })->latest()->paginate(25);
+        })->latest()->paginate(10);
 
-//        Cache::forget('unread_emails_list');
-        $unreadEmailList = Cache::remember('unread_emails_list', now()->addMinutes(2), function() {
-            return ( new GmailService() )->getAllUnreadEmailsSenders();
-        });
+//        Cache::forget('unread_emails_list'); // use for dev only
+        try {
+            $unreadEmailList = Cache::remember('unread_emails_list', now()->addMinutes(2), function() {
+                return ( new GmailService() )->getAllUnreadEmailsSenders();
+            });
 
-        $applicants->transform(function (Applicant $applicant) use ($unreadEmailList) {
-            $applicant->unread_emails_count = $this->countUnreadEmails($unreadEmailList, $applicant);
+            $applicants->transform(function (Applicant $applicant) use ($unreadEmailList) {
+                $applicant->unread_emails_count = $this->countUnreadEmails($unreadEmailList, $applicant);
 
-            return $applicant;
-        });
+                return $applicant;
+            });
+        } catch (\Exception $e) {
+            // TODO: decide how to handel this exception
+        }
 
-        return view('applicant.index', compact('applicants'));
+        // TODO: second db query need to be optimized
+        return view('applicant.index')->with([
+            'applicants' => $applicants,
+            'gmailOauth' => Settings::where('user_id', auth()->id())->pluck('sign_in_with_google')->first(),
+        ]);
     }
 
     /**
@@ -105,7 +114,7 @@ class ApplicantController extends Controller
         $email = $applicant->email;
         $gmailService = new GmailService();
 
-//        Cache::forget('email_history');
+//        Cache::forget('email_history'); // use for dev only
         $mailHistory = Cache::remember('email_history', now()->addMinutes(2), function() use ($email, $gmailService) {
             return collect($gmailService->showMessages($email));
         });
@@ -185,6 +194,15 @@ class ApplicantController extends Controller
         $applicant = Applicant::where('id', $id)->with(['jobAppliedFor' => function($query){
             $query->select(['id', 'email_subject', 'email_body', 'time_for_task']);
         }])->first();
+
+        // TODO: need to be optimized
+        $gmailOauth = Settings::where('user_id', auth()->id())->pluck('sign_in_with_google')->first();
+
+        if (! $gmailOauth) {
+            \Session::flash('flash_message', 'Sign in with Gmail Oauth first.');
+
+            return redirect('applicant');
+        }
 
         if (! $applicant) {
             \Session::flash('flash_message', 'Invalid Applicant ID.');
