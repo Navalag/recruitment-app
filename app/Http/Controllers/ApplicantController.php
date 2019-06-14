@@ -28,7 +28,9 @@ class ApplicantController extends Controller
      */
     public function index()
     {
-        $applicants = Applicant::latest()->paginate(25);
+        $applicants = Applicant::whereHas('jobAppliedFor', function ($query){
+            $query->where('active_status', 1);
+        })->latest()->paginate(25);
 
 //        Cache::forget('unread_emails_list');
         $unreadEmailList = Cache::remember('unread_emails_list', now()->addMinutes(2), function() {
@@ -69,7 +71,7 @@ class ApplicantController extends Controller
             'first_name'      => 'string|required|max:50',
             'last_name'       => 'string|required|max:50',
             'email'           => 'required|unique:applicants|max:50',
-            'phone_number'    => 'numeric',
+            'phone_number'    => 'numeric|nullable',
             'vacancy_id'      => 'numeric|required',
         ]);
 

@@ -56,10 +56,10 @@ class VacanciesController extends Controller
         }
         $this->validate($request, [
             'job_title'     => 'string|required|max:50',
-            'test_task_url' => 'string|required|max:255',
-            'time_for_task' => 'numeric|max:100|min:1',
-            'email_subject' => 'string|max:255',
-            'email_body'    => 'string',
+            'test_task_url' => 'string|max:255|nullable',
+            'time_for_task' => 'numeric|max:100|min:1|nullable',
+            'email_subject' => 'string|max:255|nullable',
+            'email_body'    => 'string|nullable',
             'active_status' => 'boolean|required',
         ]);
 
@@ -115,10 +115,10 @@ class VacanciesController extends Controller
         }
         $this->validate($request, [
             'job_title'     => 'string|required|max:50',
-            'test_task_url' => 'string|required|max:255',
-            'time_for_task' => 'numeric|max:100|min:1',
-            'email_subject' => 'string|max:255',
-            'email_body'    => 'string',
+            'test_task_url' => 'string|required|max:255|nullable',
+            'time_for_task' => 'numeric|max:100|min:1|nullable',
+            'email_subject' => 'string|max:255|nullable',
+            'email_body'    => 'string|nullable',
             'active_status' => 'boolean|required',
         ]);
 

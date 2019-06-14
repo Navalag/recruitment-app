@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Applicant extends Model
 {
+    use SoftDeletes;
+
     protected $guarded = [];
 
     protected $dates = ['start_test_time', 'finish_test_time'];

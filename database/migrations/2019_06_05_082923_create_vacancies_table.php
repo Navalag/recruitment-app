@@ -21,6 +21,7 @@ class CreateVacanciesTable extends Migration
             $table->text('email_body')->nullable();
             $table->integer('time_for_task')->nullable();
             $table->boolean('active_status');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

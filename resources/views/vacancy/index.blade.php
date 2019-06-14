@@ -8,16 +8,20 @@
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
-                    <th> Job Title </th><th> Applicants </th><th> Time For Task </th><th> Status </th><th style="min-width: 126px">Actions</th>
+                    <th> Job Title </th>
+                    <th style="max-width: 60px;"> Applicants </th>
+                    <th style="max-width: 70px;"> Time For Task </th>
+                    <th class="text-center"> Status </th>
+                    <th style="min-width: 126px">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($vacancies as $vacancy)
                     <tr>
                         <td>{{ $vacancy->job_title }}</td>
-                        <td> - </td>
-                        <td>{{ $vacancy->time_for_task }}</td>
-                        <td>
+                        <td class="text-center">{{ $vacancy->applicants_count }}</td>
+                        <td class="text-center">{{ $vacancy->time_for_task }}</td>
+                        <td class="text-center">
                             @if ($vacancy->active_status === 1)
                                 <span class="badge badge-success">active</span>
                             @else
