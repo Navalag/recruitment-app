@@ -113,13 +113,18 @@ class ApplicantController extends Controller
         $applicant = Applicant::findOrFail($id);
         $email = $applicant->email;
         $gmailService = new GmailService();
+        $mailHistory = '';
 
 //        Cache::forget('email_history'); // use for dev only
-        $mailHistory = Cache::remember('email_history', now()->addMinutes(2), function() use ($email, $gmailService) {
-            return collect($gmailService->showMessages($email));
-        });
+        try {
+            $mailHistory = Cache::remember('email_history', now()->addMinutes(2), function() use ($email, $gmailService) {
+                return collect($gmailService->showMessages($email));
+            });
 
-        $gmailService->markAsRead($email);
+            $gmailService->markAsRead($email);
+        } catch (\Exception $e) {
+            // TODO: decide how to handel this exception
+        }
 
         Cache::forget('unread_emails_list');
 
