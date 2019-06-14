@@ -7,13 +7,17 @@ use Dacastro4\LaravelGmail\Services\Message\Mail;
 
 class GmailService
 {
-    public function sendEmail($to, $subject, $uniqueKey)
+    public function sendEmail($to, $subject, $body, $time, $uniqueKey)
     {
         $mail = new Mail();
 
         $mail->to( $to, $name = null );
         $mail->subject( $subject );
-        $mail->view( 'emails.test-task', ['uniqueKey' => $uniqueKey] );
+        $mail->view( 'emails.test-task', [
+            'uniqueKey' => $uniqueKey,
+            'body'      => $body,
+            'time'      => $time,
+        ]);
 
         $mail->send();
     }

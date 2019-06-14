@@ -182,7 +182,9 @@ class ApplicantController extends Controller
 
     public function sendEmail($id)
     {
-        $applicant = Applicant::where('id', $id)->first();
+        $applicant = Applicant::where('id', $id)->with(['jobAppliedFor' => function($query){
+            $query->select(['id', 'email_subject', 'email_body', 'time_for_task']);
+        }])->first();
 
         if (! $applicant) {
             \Session::flash('flash_message', 'Invalid Applicant ID.');
@@ -196,7 +198,8 @@ class ApplicantController extends Controller
             return redirect('applicant');
         }
 
-        ( new GmailService )->sendEmail($applicant->email, 'Test', $applicant->unique_key);
+        ( new GmailService )->sendEmail($applicant->email, $applicant->jobAppliedFor->email_subject, $applicant->jobAppliedFor->email_body, $applicant->jobAppliedFor->time_for_task, $applicant->unique_key);
+        // below line will send email with standard Laravel api
 //        Mail::to($applicant->email)->send(new ApplicantTestTask($applicant->unique_key));
 
         $applicant->status = 'email sent';

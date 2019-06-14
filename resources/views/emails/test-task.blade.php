@@ -266,16 +266,14 @@
                     <tbody>
                     <tr>
                         <td class="padded">
-                            <h1>Responsive Email Template</h1>
-                            <p>With a little of <strong>Material Design</strong> by Google.</p>
-                            <p>It does not contain all styles of html-elements that you can use. So if you had trouble with something - add comment to this pen.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            <p>In addition to paragraph and h1-heading you also can create buttons, links and caption text:</p>
+                            <p>{!! $body !!}</p>
+                            <br>
+                            <h1>You will have {{ $time }} hours for this test task.</h1>
                             <p style="text-align:center;"><a href="{{ url('/start-test/' . $uniqueKey) }}" class="btn">START TEST</a></p>
                             <p style="text-align:center;"><a href="{{ url('/finish-test/' . $uniqueKey) }}" class="btn">FINISH TEST</a></p>
-                            <p style="text-align:center;">
-                                <a href="#" class="strong">Example link</a>
-                            </p>
+{{--                            <p style="text-align:center;">--}}
+{{--                                <a href="#" class="strong">Example link</a>--}}
+{{--                            </p>--}}
                             <p class="caption">This is a caption text in main email body.</p>
                         </td>
                     </tr>
