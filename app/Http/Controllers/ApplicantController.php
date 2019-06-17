@@ -40,7 +40,7 @@ class ApplicantController extends Controller
         if (request()->wantsJson()) {
             return $applicants;
         }
-        
+
         return view('applicant.index')->with([
             'applicants' => $applicants,
             'vacancies'  => $vacancies,
@@ -118,8 +118,6 @@ class ApplicantController extends Controller
         } catch (\Exception $e) {
             // TODO: decide how to handel this exception
         }
-
-        Cache::forget('unread_emails_list');
 
         return view('applicant.show')->with([
             'applicant' => $applicant,
@@ -230,17 +228,6 @@ class ApplicantController extends Controller
         return redirect('applicant');
     }
 
-    private function countUnreadEmails($unreadEmailList, $applicant)
-    {
-        $count = 0;
-
-        $unreadEmailList->each(function ($email) use ($applicant, &$count) {
-            if ($email === $applicant->email) $count++;
-        });
-
-        return $count;
-    }
-
     /**
      * @param ApplicantFilters $filters
      * @return mixed
@@ -249,22 +236,10 @@ class ApplicantController extends Controller
     {
         $applicants = Applicant::whereHas('jobAppliedFor', function ($query) {
             $query->where('active_status', 1);
-        })->latest()->filter($filters)->paginate(10);
+        })->latest()->orderBy('unread_emails_count', 'desc')->filter($filters)->paginate(10);
 
-        //Cache::forget('unread_emails_list'); // use for dev only
-        try {
-            $unreadEmailList = Cache::remember('unread_emails_list', now()->addMinutes(2), function() {
-                return ( new GmailService() )->getAllUnreadEmailsSenders();
-            });
-
-            $applicants->transform(function (Applicant $applicant) use ($unreadEmailList) {
-                $applicant->unread_emails_count = $this->countUnreadEmails($unreadEmailList, $applicant);
-
-                return $applicant;
-            });
-        } catch (\Exception $e) {
-            // TODO: decide how to handel this exception
-        }
+        // append filter query to pagination links
+        $applicants->appends($filters->getFilters());
 
         return $applicants;
     }

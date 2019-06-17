@@ -97,7 +97,7 @@
                 @endforeach
                 </tbody>
             </table>
-            <div class="pagination-wrapper"> {!! $applicants->render() !!} </div>
+            <div class="pagination-wrapper"> {{ $applicants->links() }} </div>
         </div>
 
     </div>

@@ -11,7 +11,7 @@ class Applicant extends Model
 {
     use SoftDeletes;
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     protected $dates = ['start_test_time', 'finish_test_time'];
 
