@@ -19,6 +19,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        .scrollable-menu {
+            height: auto;
+            max-height: 200px;
+            overflow-x: hidden;
+        }
+    </style>
 </head>
 <body>
     <div id="app">

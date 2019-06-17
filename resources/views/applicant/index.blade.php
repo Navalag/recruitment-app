@@ -8,7 +8,36 @@
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
-                    <th> Name </th><th> Position </th><th> Email </th><th> Status </th><th>Actions</th>
+                    <th> Name </th>
+                    <th>
+                        <div class="dropdown">
+                            <a class="btn dropdown-toggle" style="color: black;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Position
+                            </a>
+                            <div class="dropdown-menu scrollable-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="{{ url('/applicant') }}">all</a>
+                                @foreach($vacancies as $vacancy)
+                                    <a class="dropdown-item" href="{{ url("/applicant?position=$vacancy->id") }}">{{ $vacancy->job_title }}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </th>
+                    <th> Email </th>
+                    <th>
+                        <div class="dropdown">
+                            <a class="btn dropdown-toggle" style="color: black;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Status
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="{{ url('/applicant') }}">all</a>
+                                <a class="dropdown-item" href="{{ url('/applicant?status=created') }}">created</a>
+                                <a class="dropdown-item" href="{{ url('/applicant?status=email sent') }}">email sent</a>
+                                <a class="dropdown-item" href="{{ url('/applicant?status=test started') }}">test started</a>
+                                <a class="dropdown-item" href="{{ url('/applicant?status=test finished') }}">test finished</a>
+                            </div>
+                        </div>
+                    </th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>

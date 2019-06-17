@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Applicant;
+use App\Vacancy;
+use App\Filters\ApplicantFilters;
 use App\Mail\ApplicantTestTask;
 use App\Settings;
 use Illuminate\Http\Request;
@@ -25,33 +27,24 @@ class ApplicantController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @param ApplicantFilters $filters
+     * @return mixed
      */
-    public function index()
+    public function index(ApplicantFilters $filters)
     {
-        $applicants = Applicant::whereHas('jobAppliedFor', function ($query){
-            $query->where('active_status', 1);
-        })->latest()->paginate(10);
+        // TODO: db queries need to be optimized
+        $applicants = $this->getApplicants($filters);
+        $vacancies = Vacancy::all();
+        $gmailOath = Settings::where('user_id', auth()->id())->pluck('sign_in_with_google')->first();
 
-//        Cache::forget('unread_emails_list'); // use for dev only
-        try {
-            $unreadEmailList = Cache::remember('unread_emails_list', now()->addMinutes(2), function() {
-                return ( new GmailService() )->getAllUnreadEmailsSenders();
-            });
-
-            $applicants->transform(function (Applicant $applicant) use ($unreadEmailList) {
-                $applicant->unread_emails_count = $this->countUnreadEmails($unreadEmailList, $applicant);
-
-                return $applicant;
-            });
-        } catch (\Exception $e) {
-            // TODO: decide how to handel this exception
+        if (request()->wantsJson()) {
+            return $applicants;
         }
-
-        // TODO: second db query need to be optimized
+        
         return view('applicant.index')->with([
             'applicants' => $applicants,
-            'gmailOauth' => Settings::where('user_id', auth()->id())->pluck('sign_in_with_google')->first(),
+            'vacancies'  => $vacancies,
+            'gmailOauth' => $gmailOath,
         ]);
     }
 
@@ -246,5 +239,33 @@ class ApplicantController extends Controller
         });
 
         return $count;
+    }
+
+    /**
+     * @param ApplicantFilters $filters
+     * @return mixed
+     */
+    protected function getApplicants(ApplicantFilters $filters)
+    {
+        $applicants = Applicant::whereHas('jobAppliedFor', function ($query) {
+            $query->where('active_status', 1);
+        })->latest()->filter($filters)->paginate(10);
+
+        //Cache::forget('unread_emails_list'); // use for dev only
+        try {
+            $unreadEmailList = Cache::remember('unread_emails_list', now()->addMinutes(2), function() {
+                return ( new GmailService() )->getAllUnreadEmailsSenders();
+            });
+
+            $applicants->transform(function (Applicant $applicant) use ($unreadEmailList) {
+                $applicant->unread_emails_count = $this->countUnreadEmails($unreadEmailList, $applicant);
+
+                return $applicant;
+            });
+        } catch (\Exception $e) {
+            // TODO: decide how to handel this exception
+        }
+
+        return $applicants;
     }
 }
