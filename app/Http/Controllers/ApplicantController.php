@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Services\GmailService;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class ApplicantController extends Controller
 {
@@ -75,9 +76,13 @@ class ApplicantController extends Controller
             'email'           => 'required|unique:applicants|max:50',
             'phone_number'    => 'numeric|nullable',
             'vacancy_id'      => 'numeric|required',
+            'cv_url'          => 'nullable|file|max:10000',
         ]);
 
         $uniqueKey = uniqid();
+        $cvFileName = "CV_" . $request->first_name . '_' . $request->last_name . '_' . time() . '.' . request()->cv_url->getClientOriginalExtension();
+
+        $request->cv_url->storeAs('cv_applicants', $cvFileName);
 
         Applicant::create([
             'first_name'       => $request->get('first_name'),
@@ -87,6 +92,7 @@ class ApplicantController extends Controller
             'vacancy_id'       => $request->get('vacancy_id'),
             'unique_key'       => $uniqueKey,
             'status'           => 'created',
+            'cv_url'           => $cvFileName,
         ]);
 
         \Session::flash('flash_message', 'Applicant added!');
@@ -120,7 +126,7 @@ class ApplicantController extends Controller
         }
 
         return view('applicant.show')->with([
-            'applicant' => $applicant,
+            'applicant'   => $applicant,
             'mailHistory' => $mailHistory
         ]);
     }
@@ -145,7 +151,7 @@ class ApplicantController extends Controller
      * @param  int  $id
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return mixed
      * @throws \Exception
      */
     public function update($id, Request $request)
@@ -155,10 +161,22 @@ class ApplicantController extends Controller
             'last_name'    => 'string|required|max:50',
             'email'        => 'required|max:50|unique:applicants,email,'.$id,
             'phone_number' => 'numeric|nullable',
+            'cv_url'       => 'nullable|file|max:10000',
         ]);
 
         $applicant = Applicant::findOrFail($id);
-        $applicant->update($request->all());
+        $requestData = $request->all();
+
+        if ($request->cv_url) {
+            Storage::delete('cv_applicants/' . $applicant->cv_url);
+
+            $cvFileName = "CV_" . $applicant->first_name . '_' . $applicant->last_name . '_' . time() . '.' . request()->cv_url->getClientOriginalExtension();
+            $request->cv_url->storeAs('cv_applicants', $cvFileName);
+            // rewrite appropriate name
+            $requestData['cv_url'] = $cvFileName;
+        }
+
+        $applicant->update($requestData);
 
         \Session::flash('flash_message', 'Applicant updated!');
 
