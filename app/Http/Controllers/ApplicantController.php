@@ -80,9 +80,11 @@ class ApplicantController extends Controller
         ]);
 
         $uniqueKey = uniqid();
-        $cvFileName = "CV_" . $request->first_name . '_' . $request->last_name . '_' . time() . '.' . request()->cv_url->getClientOriginalExtension();
-
-        $request->cv_url->storeAs('cv_applicants', $cvFileName);
+        $cvFileName = '';
+        if ($request->cv_url) {
+            $cvFileName = "CV_" . $request->first_name . '_' . $request->last_name . '_' . time() . '.' . request()->cv_url->getClientOriginalExtension();
+            $request->cv_url->storeAs('cv_applicants', $cvFileName);
+        }
 
         Applicant::create([
             'first_name'       => $request->get('first_name'),
@@ -254,7 +256,7 @@ class ApplicantController extends Controller
     {
         $applicants = Applicant::whereHas('jobAppliedFor', function ($query) {
             $query->where('active_status', 1);
-        })->latest()->orderBy('unread_emails_count', 'desc')->filter($filters)->paginate(10);
+        })->orderBy('unread_emails_count', 'desc')->latest()->filter($filters)->paginate(10);
 
         // append filter query to pagination links
         $applicants->appends($filters->getFilters());
