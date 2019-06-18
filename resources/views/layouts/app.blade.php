@@ -21,6 +21,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
+        .level { display: flex; align-items: center; }
+        .flex { flex: 1; }
+        .form-search { max-width: 200px; }
         .scrollable-menu {
             height: auto;
             max-height: 200px;

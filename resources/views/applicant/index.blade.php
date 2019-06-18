@@ -3,7 +3,17 @@
 @section('content')
     <div class="container">
 
-        <h1>Applicants <a href="{{ url('/applicant/create') }}" class="btn btn-primary btn-sm" title="Add New Applicant"><i class="fas fa-plus"></i></a></h1>
+        <div class="level">
+            <span class="flex">
+                <h1>Applicants <a href="{{ url('/applicant/create') }}" class="btn btn-primary btn-sm" title="Add New Applicant"><i class="fas fa-plus"></i></a></h1>
+            </span>
+            <form class="form-search" action="{{ url('/applicant') }}" method="get" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" placeholder="Search...">
+                </div>
+            </form>
+        </div>
+
         <div class="table">
             <table class="table table-bordered table-striped table-hover">
                 <thead>

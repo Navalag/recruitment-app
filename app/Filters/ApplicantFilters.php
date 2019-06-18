@@ -13,10 +13,10 @@ class ApplicantFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['status', 'position'];
+    protected $filters = ['status', 'position', 'search'];
 
     /**
-     * Filter the query by a given username.
+     * Filter the query by a given position.
      *
      * @param  integer $vacancyId
      * @return Builder
@@ -27,7 +27,7 @@ class ApplicantFilters extends Filters
     }
 
     /**
-     * Filter the query according to most popular threads.
+     * Filter the query according to applicant status.
      *
      * @param  string $status
      * @return Builder
@@ -35,5 +35,16 @@ class ApplicantFilters extends Filters
     protected function status($status)
     {
         return $this->builder->where('status', $status);
+    }
+
+    /**
+     * Search everything in Applicant model.
+     *
+     * @param  string $query
+     * @return Builder
+     */
+    protected function search($query)
+    {
+        return $this->builder->search($query);
     }
 }
