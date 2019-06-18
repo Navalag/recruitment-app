@@ -32,10 +32,10 @@ class Applicant extends Model
         'columns' => [
             'applicants.first_name' => 10,
             'applicants.last_name' => 10,
-            'applicants.phone_number' => 5,
-            'applicants.email' => 5,
-            'applicants.status' => 5,
-            'vacancies.job_title' => 2,
+            'applicants.phone_number' => 10,
+            'applicants.email' => 10,
+            'applicants.status' => 2,
+            'vacancies.job_title' => 5,
         ],
         'joins' => [
             'vacancies' => ['applicants.vacancy_id','vacancies.id'],
