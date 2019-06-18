@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\VacancyFilters;
 use Illuminate\Http\Request;
 use App\Vacancy;
 
@@ -20,11 +21,12 @@ class VacanciesController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @param VacancyFilters $filters
+     * @return mixed
      */
-    public function index()
+    public function index(VacancyFilters $filters)
     {
-        $vacancies = Vacancy::latest()->paginate(10);
+        $vacancies = Vacancy::latest()->filter($filters)->paginate(10);
 
         return view('vacancy.index', compact('vacancies'));
     }
