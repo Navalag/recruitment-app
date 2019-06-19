@@ -236,7 +236,7 @@ class ApplicantController extends Controller
     {
         $applicants = Applicant::whereHas('jobAppliedFor', function ($query) {
             $query->where('active_status', 1);
-        })->latest()->orderBy('unread_emails_count', 'desc')->filter($filters)->paginate(10);
+        })->orderBy('unread_emails_count', 'desc')->latest()->filter($filters)->paginate(10);
 
         // append filter query to pagination links
         $applicants->appends($filters->getFilters());
