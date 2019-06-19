@@ -9,7 +9,8 @@
         'method' => 'PATCH',
         'url' => ['/applicant', $applicant->id],
         'class' => 'form-horizontal',
-        'files' => true
+        'files' => true,
+        'enctype' => 'multipart/form-data',
     ]) !!}
 
     <div class="form-group {{ $errors->has('first_name') ? 'has-error' : ''}}">
@@ -38,6 +39,13 @@
         <div class="col-sm-6">
             {!! Form::text('phone_number', null, ['class' => 'form-control']) !!}
             {!! $errors->first('phone_number', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div>
+    <div class="form-group {{ $errors->has('cv_url') ? 'has-error' : ''}}">
+        {!! Form::label('cv_url', 'Upload CV', ['class' => 'col-sm-3 control-label']) !!}
+        <div class="col-sm-6">
+            {!! Form::file('cv_url', null, ['class' => 'form-control']) !!}
+            {!! $errors->first('cv_url', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
 

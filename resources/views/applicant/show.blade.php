@@ -36,6 +36,11 @@
                 <tr>
                     <th> Phone Number </th><td> {{ $applicant->phone_number }} </td>
                 </tr>
+                @if($applicant->cv_url)
+                    <tr>
+                        <th> Candidate CV </th><td> <a href="{{ url('/storage/cv_applicants/' . $applicant->cv_url) }}" target="_blank">Open Resume</a> </td>
+                    </tr>
+                @endif
                 @if ($applicant->test_task_link)
                     <tr>
                         <th> Test Task Link </th><td> {{ $applicant->test_task_link }} </td>
