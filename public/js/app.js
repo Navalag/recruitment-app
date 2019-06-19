@@ -1734,15 +1734,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    var _this = this;
-
     if (this.message) {
       this.flash(this.message);
     }
-
-    window.events.$on('flash', function (message) {
-      return _this.flash(message);
-    });
   },
   methods: {
     flash: function flash(message) {
@@ -1751,10 +1745,10 @@ __webpack_require__.r(__webpack_exports__);
       this.hide();
     },
     hide: function hide() {
-      var _this2 = this;
+      var _this = this;
 
       setTimeout(function () {
-        _this2.show = false;
+        _this.show = false;
       }, 3000);
     }
   }
