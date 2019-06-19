@@ -14,7 +14,8 @@ class UpdateApplicantsTable extends Migration
     public function up()
     {
         Schema::table('applicants', function (Blueprint $table) {
-            $table->integer('unread_emails_count')->nullable()->after('email');
+            $table->integer('unread_emails_count')->default(0)->after('email');
+            $table->string('cv_url', 255)->nullable()->after('status');
         });
     }
 
@@ -27,6 +28,7 @@ class UpdateApplicantsTable extends Migration
     {
         Schema::table('applicants', function($table) {
             $table->dropColumn('unread_emails_count');
+            $table->dropColumn('cv_url');
         });
     }
 }
