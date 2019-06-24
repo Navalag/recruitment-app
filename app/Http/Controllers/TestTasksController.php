@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Applicant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Exception;
 
 class TestTasksController extends Controller
 {
+    /**
+     * Show start task view.
+     *
+     * @param $key
+     * @return \Illuminate\View\View
+     */
     public function startTestTask($key)
     {
         $applicant = Applicant::where('unique_key', 'LIKE', '%'.$key)->first();
@@ -16,6 +24,12 @@ class TestTasksController extends Controller
         return view('test-task.start', compact('applicant'));
     }
 
+    /**
+     * Start time counting.
+     *
+     * @param $key
+     * @return \Illuminate\View\View
+     */
     public function beginTestTask(Request $request)
     {
         $applicant = Applicant::where('email', $request->get('email'))->first();
@@ -31,6 +45,12 @@ class TestTasksController extends Controller
         return redirect($applicant->jobAppliedFor->test_task_url);
     }
 
+    /**
+     * Show finish task view.
+     *
+     * @param $key
+     * @return \Illuminate\View\View
+     */
     public function finishTestTask($key)
     {
         $applicant = Applicant::where('unique_key', 'LIKE', '%'.$key)->first();
@@ -40,6 +60,14 @@ class TestTasksController extends Controller
         return view('test-task.finish', compact('applicant'));
     }
 
+    /**
+     * Stop time counting.
+     *
+     * @param Request $request
+     * @return Redirect
+     *
+     * @throws Exception
+     */
     public function recordFinishTestTaskTime(Request $request)
     {
         $this->validate($request, [

@@ -37668,17 +37668,14 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      directives: [
-        { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
-      ],
-      staticClass: "alert alert-primary alert-flash",
-      attrs: { role: "alert" }
-    },
-    [_vm._v("\n    " + _vm._s(_vm.body) + "\n")]
-  )
+  return _c("div", {
+    directives: [
+      { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
+    ],
+    staticClass: "alert alert-primary alert-flash",
+    attrs: { role: "alert" },
+    domProps: { innerHTML: _vm._s(_vm.body) }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true

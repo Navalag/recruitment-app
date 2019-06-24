@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Applicant;
 use App\Vacancy;
 use App\Filters\ApplicantFilters;
-use App\Mail\ApplicantTestTask;
 use App\Settings;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use App\Services\GmailService;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Session;
+use Exception;
 
 class ApplicantController extends Controller
 {
@@ -26,14 +26,13 @@ class ApplicantController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the applicants dashboard.
      *
      * @param ApplicantFilters $filters
      * @return mixed
      */
     public function index(ApplicantFilters $filters)
     {
-        // TODO: db queries need to be optimized
         $applicants = $this->getApplicants($filters);
         $vacancies = Vacancy::all();
         $gmailOath = Settings::where('user_id', auth()->id())->pluck('sign_in_with_google')->first();
@@ -62,11 +61,10 @@ class ApplicantController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
+     * @return mixed
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     *
-     * @throws \Exception
+     * @throws Exception
      */
     public function store(Request $request)
     {
@@ -80,11 +78,7 @@ class ApplicantController extends Controller
         ]);
 
         $uniqueKey = uniqid();
-        $cvFileName = '';
-        if ($request->cv_url) {
-            $cvFileName = "CV_" . $request->first_name . '_' . $request->last_name . '_' . time() . '.' . request()->cv_url->getClientOriginalExtension();
-            $request->cv_url->storeAs('cv_applicants', $cvFileName);
-        }
+        $cvFileName = storeCVFile($request);
 
         Applicant::create([
             'first_name'       => $request->get('first_name'),
@@ -97,7 +91,7 @@ class ApplicantController extends Controller
             'cv_url'           => $cvFileName,
         ]);
 
-        \Session::flash('flash_message', 'Applicant added!');
+        Session::flash('flash_message', 'Applicant added!');
 
         return redirect('applicant');
     }
@@ -106,17 +100,15 @@ class ApplicantController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     *
      * @return \Illuminate\View\View
      */
     public function show($id)
     {
         $applicant = Applicant::findOrFail($id);
         $email = $applicant->email;
-        $gmailService = new GmailService();
+        $gmailService = app(GmailService::class);
         $mailHistory = '';
 
-//        Cache::forget('email_history'); // use for dev only
         try {
             $mailHistory = Cache::remember('email_history', now()->addMinutes(2), function() use ($email, $gmailService) {
                 return collect($gmailService->showMessages($email));
@@ -124,7 +116,7 @@ class ApplicantController extends Controller
 
             $gmailService->markAsRead($email);
         } catch (\Exception $e) {
-            // TODO: decide how to handel this exception
+            Session::flash('flash_message', 'Please <a href="/gmail-settings">Sign In</a> with Gmail oauth again.');
         }
 
         return view('applicant.show')->with([
@@ -137,7 +129,6 @@ class ApplicantController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     *
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -151,10 +142,10 @@ class ApplicantController extends Controller
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param Request $request
      * @return mixed
-     * @throws \Exception
+     *
+     * @throws Exception
      */
     public function update($id, Request $request)
     {
@@ -169,18 +160,11 @@ class ApplicantController extends Controller
         $applicant = Applicant::findOrFail($id);
         $requestData = $request->all();
 
-        if ($request->cv_url) {
-            Storage::delete('cv_applicants/' . $applicant->cv_url);
-
-            $cvFileName = "CV_" . $applicant->first_name . '_' . $applicant->last_name . '_' . time() . '.' . request()->cv_url->getClientOriginalExtension();
-            $request->cv_url->storeAs('cv_applicants', $cvFileName);
-            // rewrite appropriate name
-            $requestData['cv_url'] = $cvFileName;
-        }
+        updateCVFile($requestData, $applicant);
 
         $applicant->update($requestData);
 
-        \Session::flash('flash_message', 'Applicant updated!');
+        Session::flash('flash_message', 'Applicant updated!');
 
         return redirect('applicant');
     }
@@ -189,8 +173,7 @@ class ApplicantController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return mixed
      */
     public function destroy($id)
     {
@@ -200,62 +183,72 @@ class ApplicantController extends Controller
             return response([], 204);
         }
 
-        \Session::flash('flash_message', 'Applicant deleted!');
+        Session::flash('flash_message', 'Applicant deleted!');
 
         return redirect('applicant');
     }
 
+    /**
+     * Send email with Gmail api.
+     *
+     * @param  int $id
+     * @return mixed
+     */
     public function sendEmail($id)
     {
         $applicant = Applicant::where('id', $id)->with(['jobAppliedFor' => function($query){
             $query->select(['id', 'email_subject', 'email_body', 'time_for_task']);
         }])->first();
 
-        // TODO: need to be optimized
         $gmailOauth = Settings::where('user_id', auth()->id())->pluck('sign_in_with_google')->first();
 
         if (! $gmailOauth) {
-            \Session::flash('flash_message', 'Sign in with Gmail Oauth first.');
+            Session::flash('flash_message', 'Sign in with Gmail Oauth first.');
 
             return redirect('applicant');
         }
 
         if (! $applicant) {
-            \Session::flash('flash_message', 'Invalid Applicant ID.');
+            Session::flash('flash_message', 'Invalid Applicant ID.');
 
             return redirect('applicant');
         }
 
         if ($applicant->status !== 'created') {
-            \Session::flash('flash_message', 'Email has already been sent.');
+            Session::flash('flash_message', 'Email has already been sent.');
 
             return redirect('applicant');
         }
 
-        ( new GmailService )->sendEmail($applicant->email, $applicant->jobAppliedFor->email_subject, $applicant->jobAppliedFor->email_body, $applicant->jobAppliedFor->time_for_task, $applicant->unique_key);
-        // below line will send email with standard Laravel api
-//        Mail::to($applicant->email)->send(new ApplicantTestTask($applicant->unique_key));
+        try {
+            app(GmailService::class)->sendEmail($applicant->email, $applicant->jobAppliedFor->email_subject, $applicant->jobAppliedFor->email_body, $applicant->jobAppliedFor->time_for_task, $applicant->unique_key);
+        } catch (\Exception $e) {
+            Session::flash('flash_message', 'Sign in with Gmail Oauth first.');
 
-        $applicant->status = 'email sent';
-        $applicant->save();
+            return redirect('applicant');
+        }
+
+        $applicant->update(['status' => 'email sent']);
 
         if (request()->wantsJson()) {
             return response([], 200);
         }
 
-        \Session::flash('flash_message', 'Email Sent!');
+        Session::flash('flash_message', 'Email Sent!');
 
         return redirect('applicant');
     }
 
     /**
+     * Get active applicants in default order with pagination
+     *
      * @param ApplicantFilters $filters
-     * @return mixed
+     * @return Collection
      */
     protected function getApplicants(ApplicantFilters $filters)
     {
         $applicants = Applicant::whereHas('jobAppliedFor', function ($query) {
-            $query->where('active_status', 1);
+            $query->active();
         })->orderBy('unread_emails_count', 'desc')->latest()->filter($filters)->paginate(10);
 
         // append filter query to pagination links

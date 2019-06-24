@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Filters\VacancyFilters;
 use Illuminate\Http\Request;
 use App\Vacancy;
+use Exception;
+use Illuminate\Support\Facades\Session;
 
 class VacanciesController extends Controller
 {
@@ -19,7 +21,7 @@ class VacanciesController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the vacancy dashboard.
      *
      * @param VacancyFilters $filters
      * @return mixed
@@ -44,18 +46,13 @@ class VacanciesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
+     * @return mixed
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     *
-     * @throws \Exception
+     * @throws Exception
      */
     public function store(Request $request)
     {
-        // TODO: try to fix it in a better way
-        if( !$request->has('active_status') ) {
-            $request->merge(['active_status' => 0]);
-        }
         $this->validate($request, [
             'job_title'     => 'string|required|max:50',
             'test_task_url' => 'string|max:255|nullable',
@@ -67,7 +64,7 @@ class VacanciesController extends Controller
 
         Vacancy::create($request->all());
 
-        \Session::flash('flash_message', 'Vacancy added!');
+        Session::flash('flash_message', 'Vacancy added!');
 
         return redirect('vacancy');
     }
@@ -76,7 +73,6 @@ class VacanciesController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     *
      * @return \Illuminate\View\View
      */
     public function show($id)
@@ -90,7 +86,6 @@ class VacanciesController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     *
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -104,17 +99,13 @@ class VacanciesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
+     * @return mixed
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     * @throws \Exception
+     * @throws Exception
      */
     public function update($id, Request $request)
     {
-        // TODO: try to fix it in a better way
-        if( !$request->has('active_status') ) {
-            $request->merge(['active_status' => 0]);
-        }
         $this->validate($request, [
             'job_title'     => 'string|required|max:50',
             'test_task_url' => 'string|required|max:255|nullable',
@@ -127,7 +118,7 @@ class VacanciesController extends Controller
         $vacancy = Vacancy::findOrFail($id);
         $vacancy->update($request->all());
 
-        \Session::flash('flash_message', 'Vacancy updated!');
+        Session::flash('flash_message', 'Vacancy updated!');
 
         return redirect('vacancy');
     }
@@ -137,13 +128,13 @@ class VacanciesController extends Controller
      *
      * @param  int  $id
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return mixed
      */
     public function destroy($id)
     {
         Vacancy::destroy($id);
 
-        \Session::flash('flash_message', 'Vacancy deleted!');
+        Session::flash('flash_message', 'Vacancy deleted!');
 
         return redirect('vacancy');
     }
