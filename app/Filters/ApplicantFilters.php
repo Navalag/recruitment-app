@@ -2,8 +2,6 @@
 
 namespace App\Filters;
 
-use App\Applicant;
-use App\Vacancy;
 use Illuminate\Database\Eloquent\Builder;
 
 class ApplicantFilters extends Filters

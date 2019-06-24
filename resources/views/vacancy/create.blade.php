@@ -46,6 +46,7 @@
         <div class="form-group {{ $errors->has('active_status') ? 'has-error' : ''}}">
             {!! Form::label('active_status', 'Active', ['class' => 'col-sm-3 control-label']) !!}
             <div class="col-sm-6">
+                {{ Form::hidden('active_status',0) }}
                 {!! Form::checkbox('active_status', true, true, ['class' => 'form-control']) !!}
                 {!! $errors->first('active_status', '<p class="help-block">:message</p>') !!}
             </div>

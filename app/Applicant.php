@@ -7,13 +7,24 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Nicolaslopezj\Searchable\SearchableTrait;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Applicant extends Model
 {
     use SoftDeletes, SearchableTrait;
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
     protected $guarded = ['id'];
 
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
     protected $dates = ['start_test_time', 'finish_test_time'];
 
     /**
@@ -42,11 +53,21 @@ class Applicant extends Model
         ],
     ];
 
+    /**
+     * Get a string path for the thread.
+     *
+     * @return string
+     */
     public function path()
     {
         return "/applicant/{$this->id}";
     }
 
+    /**
+     * Applicant belongs to one vacancy
+     *
+     * @return HasOne
+     */
     public function jobAppliedFor()
     {
         return $this->hasOne('App\Vacancy', 'id', 'vacancy_id');
