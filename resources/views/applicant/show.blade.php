@@ -10,12 +10,12 @@
             'url' => ['applicant', $applicant->id],
             'style' => 'display:inline'
         ]) !!}
-            {!! Form::button('<i class="far fa-trash-alt"></i>', array(
-                    'type' => 'submit',
-                    'class' => 'btn btn-danger btn-sm',
-                    'title' => 'Delete Applicant',
-                    'onclick'=>'return confirm("Confirm delete?")'
-            ))!!}
+        {!! Form::button('<i class="far fa-trash-alt"></i>', array(
+                'type' => 'submit',
+                'class' => 'btn btn-danger btn-sm',
+                'title' => 'Delete Applicant',
+                'onclick'=>'return confirm("Confirm delete?")'
+        ))!!}
         {!! Form::close() !!}
     </h1>
     <div class="table-responsive">

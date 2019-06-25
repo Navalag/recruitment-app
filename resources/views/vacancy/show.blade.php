@@ -11,10 +11,10 @@
             'style' => 'display:inline'
         ]) !!}
         {!! Form::button('<i class="far fa-trash-alt"></i>', array(
-                'type' => 'submit',
-                'class' => 'btn btn-danger btn-sm',
-                'title' => 'Delete Vacancy',
-                'onclick'=>'return confirm("Confirm delete?")'
+            'type' => 'submit',
+            'class' => 'btn btn-danger btn-sm',
+            'title' => 'Delete Vacancy',
+            'onclick'=>'return confirm("Confirm delete?")'
         ))!!}
         {!! Form::close() !!}
     </h1>

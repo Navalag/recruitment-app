@@ -5,7 +5,7 @@
 
         <div class="level">
             <span class="flex">
-                <h1>Applicants <a href="{{ url('/applicant/create') }}" class="btn btn-primary btn-sm" title="Add New Applicant"><i class="fas fa-plus"></i></a></h1>
+                <h1 class="mb-3">Applicants <a href="{{ url('/applicant/create') }}" class="btn btn-primary btn-sm" title="Add New Applicant"><i class="fas fa-plus"></i></a></h1>
             </span>
             <form class="form-search" action="{{ url('/applicant') }}" method="get" role="search">
                 <div class="input-group">
@@ -18,7 +18,7 @@
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
-                    <th> Name </th>
+                    <th class="align-middle"> Name </th>
                     <th>
                         <div class="dropdown">
                             <a class="btn dropdown-toggle" style="color: black;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                     </th>
-                    <th> Email </th>
+                    <th class="align-middle"> Email </th>
                     <th>
                         <div class="dropdown">
                             <a class="btn dropdown-toggle" style="color: black;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                     </th>
-                    <th>Actions</th>
+                    <th class="align-middle">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
