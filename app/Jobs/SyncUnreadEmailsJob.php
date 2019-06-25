@@ -32,33 +32,26 @@ class SyncUnreadEmailsJob implements ShouldQueue
     }
 
     /**
-     * Execute the job.
+     * Sync Unread emails count via Gmail api
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         try {
-            $unreadEmailList = ( new GmailService() )->getAllUnreadEmailsSenders();
+            $unreadEmailList = app(GmailService::class)->getAllUnreadEmailsSenders();
 
             $this->applicants->transform(function (Applicant $applicant) use ($unreadEmailList) {
-                $applicant->update(['unread_emails_count' => $this->countUnreadEmails($unreadEmailList, $applicant)]);
+
+                $applicant->update(['unread_emails_count' => $unreadEmailList->filter(function ($value, $key) use ($applicant) {
+                    return $applicant->email == $value;
+                })->count()]);
 
                 return $applicant;
             });
         } catch (\Exception $e) {
-            // TODO: decide how to handel this exception
+            // TODO: fix message to show it when a user next time refresh a page
+            \Session::flash('flash_message', 'Please <a href="/gmail-settings">Sign In</a> with Gmail oauth again.');
         }
-    }
-
-    private function countUnreadEmails($unreadEmailList, $applicant)
-    {
-        $count = 0;
-
-        $unreadEmailList->each(function ($email) use ($applicant, &$count) {
-            if ($email === $applicant->email) $count++;
-        });
-
-        return $count;
     }
 }

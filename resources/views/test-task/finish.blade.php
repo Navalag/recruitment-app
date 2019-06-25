@@ -10,14 +10,26 @@
                         <form action="{{ url('/finish-test') }}" method="POST">
                             @csrf
 
-                            <div class="form-group">
-                                <label for="email">Email address</label>
-                                <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
-                            </div>
+                            @if (session()->has('success'))
+                                <div class="alert alert-success">
+                                     {{ session()->get('success') }}
+                                </div>
+                            @endif
+
+                            @if($errors->any())
+                                <div class="alert alert-warning" role="alert">
+                                    {{$errors->first()}}
+                                </div>
+                            @endif
+
                             <div class="form-group">
                                 <label for="link">GitHub link</label>
                                 <input type="text" name="link" class="form-control" id="link" placeholder="Enter your link here" required>
                             </div>
+
+                            <input type="hidden" name="email" value="{{ $applicant->email }}">
+                            <input type="hidden" name="unique_key" value="{{ $applicant->unique_key }}">
+
                             <button type="submit" class="btn btn-primary">Send</button>
                         </form>
                     </div>

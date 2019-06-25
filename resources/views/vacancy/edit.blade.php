@@ -60,7 +60,6 @@
                         </div>
                     </div>
 
-
                     <div class="form-group">
                         <div class="offset-md-3 col-md-9">
                             {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}

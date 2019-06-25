@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Dacastro4\LaravelGmail\Facade\LaravelGmail;
-use Illuminate\Http\Request;
 use App\Settings;
+use Illuminate\Support\Facades\Redirect;
+use Exception;
 
 class GmailSettingsController extends Controller
 {
@@ -18,6 +19,11 @@ class GmailSettingsController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Show gmail oauth view.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $settings = Settings::where('user_id', auth()->id())->first();
@@ -25,11 +31,21 @@ class GmailSettingsController extends Controller
         return view('settings.index', compact('settings'));
     }
 
+    /**
+     * Make oauth request to Gmail api.
+     *
+     * @return Redirect
+     */
     public function auth()
     {
         return LaravelGmail::redirect();
     }
 
+    /**
+     * Save token.
+     *
+     * @return Redirect
+     */
     public function createToken()
     {
         LaravelGmail::makeToken();
@@ -42,6 +58,13 @@ class GmailSettingsController extends Controller
         return redirect('/applicant');
     }
 
+    /**
+     * Logout from gmail.
+     *
+     * @return Redirect
+     *
+     * @throws Exception
+     */
     public function logout()
     {
         LaravelGmail::logout(); //It returns exception if fails

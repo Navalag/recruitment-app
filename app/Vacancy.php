@@ -7,11 +7,17 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Nicolaslopezj\Searchable\SearchableTrait;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Vacancy extends Model
 {
     use SoftDeletes, SearchableTrait;
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
     protected $guarded = ['id'];
 
     /**
@@ -35,6 +41,9 @@ class Vacancy extends Model
         ]
     ];
 
+    /**
+     * Boot the model.
+     */
     public static function boot() {
         parent::boot();
 
@@ -47,13 +56,18 @@ class Vacancy extends Model
         });
     }
 
+    /**
+     * A vacancy may have many applicants.
+     *
+     * @return HasMany
+     */
     public function applicants()
     {
         return $this->hasMany('App\Applicant');
     }
 
     /**
-     * Apply all relevant thread filters.
+     * Apply all relevant vacancy filters.
      *
      * @param  Builder          $query
      * @param  VacancyFilters $filters
@@ -62,5 +76,16 @@ class Vacancy extends Model
     public function scopeFilter(Builder $query, VacancyFilters $filters)
     {
         return $filters->apply($query);
+    }
+
+    /**
+     * Scope a query to only include active vacancies.
+     *
+     * @param  Builder  $query
+     * @return Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('active_status', 1);
     }
 }

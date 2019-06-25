@@ -22,15 +22,13 @@ Route::resource('applicant', 'ApplicantController');
 
 Route::resource('vacancy', 'VacanciesController');
 
-Route::get('/start-test/{key}', 'TestTasksController@startTestTask');
-Route::post('/start-test', 'TestTasksController@beginTestTask');
+Route::get('/start-test/{key}', 'TestTasks\StartTestTaskController@index');
+Route::post('/start-test', 'TestTasks\StartTestTaskController@beginTask');
 
-Route::get('/finish-test/{key}', 'TestTasksController@finishTestTask');
-Route::post('/finish-test', 'TestTasksController@recordFinishTestTaskTime');
+Route::get('/finish-test/{key}', 'TestTasks\FinishTestTaskController@index');
+Route::post('/finish-test', 'TestTasks\FinishTestTaskController@finishTask');
 
 Route::get('/gmail-settings', 'GmailSettingsController@index');
 Route::get('/oauth/gmail', 'GmailSettingsController@auth');
 Route::get('/oauth/gmail/callback', 'GmailSettingsController@createToken');
 Route::get('/oauth/gmail/logout', 'GmailSettingsController@logout');
-
-Route::get('/gmail/show-messages', 'GmailController@showMessages');
