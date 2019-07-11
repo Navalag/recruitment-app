@@ -32,7 +32,11 @@ class GmailService
             'time'      => $time,
         ]);
 
-        $mail->send();
+        try {
+            $mail->send();
+        } catch (\Exception $e) {
+            //TODO: handel the exception
+        }
     }
 
     /**

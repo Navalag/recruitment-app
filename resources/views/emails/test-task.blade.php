@@ -1,20 +1,3 @@
-{{--@component('mail::message')--}}
-{{--# Introduction--}}
-
-{{--The body of your message.--}}
-
-{{--@component('mail::button', ['url' => url('/start-test/')])--}}
-{{--    Start Task--}}
-{{--@endcomponent--}}
-
-{{--@component('mail::button', ['url' => url('/finish-test/')])--}}
-{{--    Finish Task--}}
-{{--@endcomponent--}}
-
-{{--Thanks,<br>--}}
-{{--{{ config('app.name') }}--}}
-{{--@endcomponent--}}
-
 <style>
     /* This styles you should add to your html as inline-styles */
     /* You can easily do it with http://inlinestyler.torchboxapps.com/ */

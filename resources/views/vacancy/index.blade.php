@@ -5,7 +5,7 @@
 
         <div class="level">
             <span class="flex">
-                <h1>Vacancies <a href="{{ url('/vacancy/create') }}" class="btn btn-primary btn-sm" title="Add New Vacancy"><i class="fas fa-plus"></i></a></h1>
+                <h1 class="mb-3">Vacancies <a href="{{ url('/vacancy/create') }}" class="btn btn-primary btn-sm" title="Add New Vacancy"><i class="fas fa-plus"></i></a></h1>
             </span>
             <form class="form-search" action="{{ url('/vacancy') }}" method="get" role="search">
                 <div class="input-group">

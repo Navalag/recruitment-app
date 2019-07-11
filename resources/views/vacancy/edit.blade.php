@@ -2,75 +2,73 @@
 
 @section('content')
 <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header"><h3>Edit Vacancy - {{ $vacancy->job_title }}</h3></div>
 
-    <h1>Edit Vacancy - {{ $vacancy->job_title }}</h1>
+                <div class="card-body">
+                    {!! Form::model($vacancy, [
+                        'method' => 'PATCH',
+                        'url' => ['/vacancy', $vacancy->id],
+                        'class' => 'form-horizontal',
+                        'files' => true
+                    ]) !!}
 
-    {!! Form::model($vacancy, [
-        'method' => 'PATCH',
-        'url' => ['/vacancy', $vacancy->id],
-        'class' => 'form-horizontal',
-        'files' => true
-    ]) !!}
+                    @if ($errors->any())
+                        <div class="alert alert-danger" role="alert">
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}<br>
+                            @endforeach
+                        </div>
+                    @endif
 
-    <div class="form-group {{ $errors->has('job_title') ? 'has-error' : ''}}">
-        {!! Form::label('job_title', 'Job Title', ['class' => 'col-sm-3 control-label']) !!}
-        <div class="col-sm-6">
-            {!! Form::text('job_title', null, ['class' => 'form-control']) !!}
-            {!! $errors->first('job_title', '<p class="help-block">:message</p>') !!}
+                    <div class="form-group row">
+                        {!! Form::label('job_title', 'Job Title', ['class' => 'col-md-3 col-form-label']) !!}
+                        <div class="col-md-9">
+                            {!! Form::text('job_title', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {!! Form::label('test_task_url', 'Test Task URL', ['class' => 'col-md-3 col-form-label']) !!}
+                        <div class="col-md-9">
+                            {!! Form::text('test_task_url', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {!! Form::label('time_for_task', 'Time For Task (in hours)', ['class' => 'col-md-3 col-form-label']) !!}
+                        <div class="col-md-9">
+                            {!! Form::number('time_for_task', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {!! Form::label('email_subject', 'Email Title', ['class' => 'col-md-3 col-form-label']) !!}
+                        <div class="col-md-9">
+                            {!! Form::text('email_subject', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {!! Form::label('email_body', 'Email Body', ['class' => 'col-md-3 col-form-label']) !!}
+                        <div class="col-md-9">
+                            {!! Form::textarea('email_body', null, ['class' => 'form-control', 'rows' => 4]) !!}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {!! Form::label('active_status', 'Active', ['class' => 'col-md-3 col-form-label']) !!}
+                        <div class="col-md-9">
+                            {!! Form::checkbox('active_status', true, $vacancy->active_status, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="offset-md-3 col-md-9">
+                            {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
         </div>
     </div>
-    <div class="form-group {{ $errors->has('test_task_url') ? 'has-error' : ''}}">
-        {!! Form::label('test_task_url', 'Test Task URL', ['class' => 'col-sm-3 control-label']) !!}
-        <div class="col-sm-6">
-            {!! Form::text('test_task_url', null, ['class' => 'form-control']) !!}
-            {!! $errors->first('test_task_url', '<p class="help-block">:message</p>') !!}
-        </div>
-    </div>
-    <div class="form-group {{ $errors->has('time_for_task') ? 'has-error' : ''}}">
-        {!! Form::label('time_for_task', 'Time For Task (in hours)', ['class' => 'col-sm-3 control-label']) !!}
-        <div class="col-sm-6">
-            {!! Form::number('time_for_task', null, ['class' => 'form-control']) !!}
-            {!! $errors->first('time_for_task', '<p class="help-block">:message</p>') !!}
-        </div>
-    </div>
-    <div class="form-group {{ $errors->has('email_subject') ? 'has-error' : ''}}">
-        {!! Form::label('email_subject', 'Email Title', ['class' => 'col-sm-3 control-label']) !!}
-        <div class="col-sm-6">
-            {!! Form::text('email_subject', null, ['class' => 'form-control']) !!}
-            {!! $errors->first('email_subject', '<p class="help-block">:message</p>') !!}
-        </div>
-    </div>
-    <div class="form-group {{ $errors->has('email_body') ? 'has-error' : ''}}">
-        {!! Form::label('email_body', 'Email Body', ['class' => 'col-sm-3 control-label']) !!}
-        <div class="col-sm-6">
-            {!! Form::textarea('email_body', null, ['class' => 'form-control']) !!}
-            {!! $errors->first('email_body', '<p class="help-block">:message</p>') !!}
-        </div>
-    </div>
-    <div class="form-group {{ $errors->has('active_status') ? 'has-error' : ''}}">
-        {!! Form::label('active_status', 'Active', ['class' => 'col-sm-3 control-label']) !!}
-        <div class="col-sm-6">
-            {{ Form::hidden('active_status',0) }}
-            {!! Form::checkbox('active_status', true, $vacancy->active_status, ['class' => 'form-control']) !!}
-            {!! $errors->first('active_status', '<p class="help-block">:message</p>') !!}
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-3">
-            {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
-        </div>
-    </div>
-    {!! Form::close() !!}
-
-    @if ($errors->any())
-        <ul class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
-
 </div>
 @endsection
