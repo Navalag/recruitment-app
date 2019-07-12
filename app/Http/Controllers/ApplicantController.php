@@ -110,7 +110,7 @@ class ApplicantController extends Controller
         $mailHistory = '';
 
         try {
-            $mailHistory = Cache::remember('email_history', now()->addMinutes(2), function() use ($email, $gmailService) {
+            $mailHistory = Cache::remember('email_history.' . $email, now()->addMinutes(2), function() use ($email, $gmailService) {
                 return collect($gmailService->showMessages($email));
             });
 
