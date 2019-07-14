@@ -2,10 +2,10 @@
 
 The idea of the project is to allow IT recruiters manage vacancies, and applicants, and send them test tasks with an option to track implementation time.
 
-Once an applicant is created, a mail is sent to him, with 2 buttons (to start the test task) and to end it.
-Both of them are saving time so recruiter can see how much time was spent on task implementation.
+Once an applicant is created, an email is sent to him, with 2 buttons - to start the test task and to end it.
+Both of them are saving time so recruiter can see how many time was spent on task implementation.
 
-Also it has gmail integration (so actually send those messages from recruiter's mail).
+Also it has gmail integration (to read email history, see new emails from each applicant and actually send emails).
 
 #### Used technologies:
 - Laravel
